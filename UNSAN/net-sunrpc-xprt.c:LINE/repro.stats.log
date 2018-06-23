@@ -1,0 +1,121 @@
+166 programs, 1 VMs
+extracting reproducer from 103 programs
+single: executing 2 programs separately with timeout 10s
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): socket$inet6_icmp_raw-dup2-setsockopt$inet6_int-sendmsg$unix-recvfrom$packet
+program did not crash
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+single: successfully extracted reproducer
+found reproducer with 3 syscalls
+minimizing guilty program
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-perf_event_open
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-mount
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-mount
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+simplifying C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:false EnableNetdev:true ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:true EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:true}): creat-perf_event_open-mount
+program crashed: UBSAN: Undefined behaviour in net/sunrpc/xprt.c:LINE
+reproducing took 5m54.557800328s
+repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in net/sunrpc/xprt.c:568:22
+shift exponent 536870976 is too large for 64-bit type 'long unsigned int'
+CPU: 0 PID: 2709 Comm: syz-executor131 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ __ubsan_handle_shift_out_of_bounds+0x29a/0x2ff
+ xprt_reset_majortimeo+0x323/0x440
+ xprt_request_init+0x4d2/0x730
+ call_reserveresult+0x9d/0x240
+ __rpc_execute+0x23a/0xc20
+ rpc_execute+0xf5/0x250
+ rpc_run_task+0x4a1/0x9f0
+ rpc_call_sync+0xcf/0x1a0
+ rpc_ping+0xde/0x140
+ rpc_create_xprt+0x1e8/0x590
+ rpc_create+0x3a9/0x600
+ nfs_create_rpc_client+0x3a1/0x4d0
+ nfs_init_client+0x7b/0x100
+ nfs_get_client+0xa74/0x1440
+ nfs_init_server+0x236/0xdf0
+ nfs_create_server+0x9a/0x750
+ nfs_try_mount+0x270/0xaf0
+ nfs_fs_mount+0x151f/0x30e0
+ mount_fs+0xaf/0x330
+ vfs_kern_mount+0xfc/0x4d0
+ do_mount+0x46f/0x2fa0
+ ksys_mount+0xb0/0x120
+ __x64_sys_mount+0xcc/0x170
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fe09
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffee955ff78 EFLAGS: 00000286 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 0030656c69662f2e RCX: 000000000043fe09
+RDX: 00000000200001c0 RSI: 0000000020000100 RDI: 0000000020000200
+RBP: 00000000006ca018 R08: 0000000020000180 R09: 00000000004002c8
+R10: 0000000000000000 R11: 0000000000000286 R12: 0000000000401730
+R13: 00000000004017c0 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+
+final repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in net/sunrpc/xprt.c:568:22
+shift exponent 536870976 is too large for 64-bit type 'long unsigned int'
+CPU: 0 PID: 2709 Comm: syz-executor131 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ __ubsan_handle_shift_out_of_bounds+0x29a/0x2ff
+ xprt_reset_majortimeo+0x323/0x440
+ xprt_request_init+0x4d2/0x730
+ call_reserveresult+0x9d/0x240
+ __rpc_execute+0x23a/0xc20
+ rpc_execute+0xf5/0x250
+ rpc_run_task+0x4a1/0x9f0
+ rpc_call_sync+0xcf/0x1a0
+ rpc_ping+0xde/0x140
+ rpc_create_xprt+0x1e8/0x590
+ rpc_create+0x3a9/0x600
+ nfs_create_rpc_client+0x3a1/0x4d0
+ nfs_init_client+0x7b/0x100
+ nfs_get_client+0xa74/0x1440
+ nfs_init_server+0x236/0xdf0
+ nfs_create_server+0x9a/0x750
+ nfs_try_mount+0x270/0xaf0
+ nfs_fs_mount+0x151f/0x30e0
+ mount_fs+0xaf/0x330
+ vfs_kern_mount+0xfc/0x4d0
+ do_mount+0x46f/0x2fa0
+ ksys_mount+0xb0/0x120
+ __x64_sys_mount+0xcc/0x170
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fe09
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffee955ff78 EFLAGS: 00000286 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 0030656c69662f2e RCX: 000000000043fe09
+RDX: 00000000200001c0 RSI: 0000000020000100 RDI: 0000000020000200
+RBP: 00000000006ca018 R08: 0000000020000180 R09: 00000000004002c8
+R10: 0000000000000000 R11: 0000000000000286 R12: 0000000000401730
+R13: 00000000004017c0 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+

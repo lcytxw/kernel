@@ -1,0 +1,77 @@
+executing program
+syzkaller login: [   14.192295] ================================================================================
+[   14.194603] UBSAN: Undefined behaviour in ./include/net/xfrm.h:894:23
+[   14.196227] shift exponent -128 is negative
+[   14.197156] CPU: 0 PID: 2709 Comm: syz-executor188 Not tainted 4.18.0-rc1 #2
+[   14.198645] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   14.201069] Call Trace:
+[   14.201628]  dump_stack+0x122/0x1c8
+[   14.202382]  ? show_regs_print_info+0x18/0x18
+[   14.203300]  ubsan_epilogue+0x12/0x86
+[   14.204086]  __ubsan_handle_shift_out_of_bounds+0x29a/0x2ff
+[   14.205308]  ? kmem_cache_alloc+0x135/0x340
+[   14.206198]  ? __ubsan_handle_load_invalid_value+0x1bc/0x1bc
+[   14.207409]  ? inet_sendmsg+0x103/0x490
+[   14.208230]  ? __sys_sendto+0x239/0x3c0
+[   14.209039]  ? __x64_sys_sendto+0xef/0x1c0
+[   14.209905]  ? do_syscall_64+0xb8/0x3a0
+[   14.210716]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   14.211808]  ? unwind_next_frame+0xea6/0x2e50
+[   14.212736]  ? rt_add_uncached_list+0x12b/0x2c0
+[   14.213693]  ? rt_add_uncached_list+0x12b/0x2c0
+[   14.214649]  ? __local_bh_enable_ip+0x6c/0xd0
+[   14.215581]  ? xfrm_selector_match+0xde9/0x11e0
+[   14.216568]  xfrm_selector_match+0xde9/0x11e0
+[   14.217489]  xfrm_sk_policy_lookup+0x179/0x460
+[   14.218427]  ? dst_init+0x3fc/0x590
+[   14.219174]  ? xfrm_selector_match+0x11e0/0x11e0
+[   14.220154]  xfrm_lookup+0x20e/0x1be0
+[   14.220937]  ? rt_add_uncached_list+0x2c0/0x2c0
+[   14.221895]  ? xfrm_policy_lookup_bytype.constprop.30+0x16b0/0x16b0
+[   14.223208]  ? __ip_select_ident+0x2a0/0x2a0
+[   14.224119]  ? kasan_kmalloc+0xad/0xe0
+[   14.224922]  ? ip_route_output_key_hash_rcu+0x2e1/0x2800
+[   14.226043]  ? ip_route_input_noref+0xf0/0xf0
+[   14.226994]  ? xfrm_user_policy+0x37b/0x5e0
+[   14.227881]  ? ip_route_output_key_hash+0x183/0x200
+[   14.228911]  ? ip_route_output_key_hash_rcu+0x2800/0x2800
+[   14.230047]  ? trace_hardirqs_on+0x5d/0x160
+[   14.230931]  xfrm_lookup_route+0x42/0x1f0
+[   14.231782]  ip_route_output_flow+0x86/0xc0
+[   14.232675]  udp_sendmsg+0x15c1/0x2180
+[   14.233476]  ? ip_reply_glue_bits+0x100/0x100
+[   14.234396]  ? udp_recvmsg+0x13e0/0x13e0
+[   14.235232]  ? udp_lib_lport_inuse+0x520/0x520
+[   14.236269]  ? ip_ra_control+0x5b0/0x5b0
+[   14.237126]  ? _cond_resched+0x1c/0x90
+[   14.237933]  ? __alloc_pages_nodemask+0x1b0/0x600
+[   14.238926]  ? release_sock+0x179/0x240
+[   14.239753]  ? _raw_spin_unlock_bh+0xa3/0x100
+[   14.240683]  ? trace_hardirqs_on+0x5d/0x160
+[   14.241571]  ? release_sock+0x179/0x240
+[   14.242391]  ? _raw_spin_unlock_bh+0xa3/0x100
+[   14.243316]  ? _raw_write_trylock+0xa0/0xa0
+[   14.244217]  inet_sendmsg+0x103/0x490
+[   14.245006]  ? security_socket_sendmsg+0x91/0xd0
+[   14.245988]  ? inet_recvmsg+0x590/0x590
+[   14.246832]  sock_sendmsg+0xf9/0x180
+[   14.247601]  __sys_sendto+0x239/0x3c0
+[   14.248393]  ? __ia32_sys_getpeername+0xd0/0xd0
+[   14.249362]  ? selinux_netlbl_socket_setsockopt+0x13b/0x3d0
+[   14.250537]  ? ip_setsockopt+0x70/0xa0
+[   14.251339]  ? sock_common_setsockopt+0xbe/0x150
+[   14.252325]  ? __sys_setsockopt+0x1a6/0x2a0
+[   14.253218]  ? sockfd_lookup_light+0x1e0/0x1e0
+[   14.254167]  __x64_sys_sendto+0xef/0x1c0
+[   14.255006]  ? trace_hardirqs_on+0x5d/0x160
+[   14.255901]  do_syscall_64+0xb8/0x3a0
+[   14.256712]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   14.257781] RIP: 0033:0x440139
+[   14.258436] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   14.262404] RSP: 002b:00007ffda9b02cd8 EFLAGS: 00000216 ORIG_RAX: 000000000000002c
+[   14.263991] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 0000000000440139
+[   14.265474] RDX: 0000000000000000 RSI: 00000000200014c0 RDI: 0000000000000003
+[   14.266990] RBP: 00000000006ca018 R08: 0000000020001540 R09: 0000000000000010
+[   14.268484] R10: 0000000000000000 R11: 0000000000000216 R12: 0000000000401a60
+[   14.269981] R13: 0000000000401af0 R14: 0000000000000000 R15: 0000000000000000
+[   14.271458] ================================================================================

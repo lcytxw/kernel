@@ -1,0 +1,172 @@
+================================================================================
+UBSAN: Undefined behaviour in sound/core/seq/seq_clientmgr.c:2007:14
+signed integer overflow:
+2147483647 + 1 cannot be represented in type 'int'
+CPU: 0 PID: 7477 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ __ubsan_handle_add_overflow+0x2a/0x31 lib/ubsan.c:198
+ snd_seq_ioctl_query_next_client+0x1ac/0x1d0 sound/core/seq/seq_clientmgr.c:2007
+ snd_seq_ioctl+0x264/0x3d0 sound/core/seq/seq_clientmgr.c:2144
+ vfs_ioctl fs/ioctl.c:46 [inline]
+ do_vfs_ioctl+0x1e8/0x1340 fs/ioctl.c:686
+ ksys_ioctl+0x9c/0xb0 fs/ioctl.c:701
+ __do_sys_ioctl fs/ioctl.c:708 [inline]
+ __se_sys_ioctl fs/ioctl.c:706 [inline]
+ __x64_sys_ioctl+0x81/0xd0 fs/ioctl.c:706
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007fc543d02c68 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007fc543d036d4 RCX: 0000000000455a09
+RDX: 00000000200001c0 RSI: 00000000c0bc5351 RDI: 0000000000000013
+RBP: 000000000072bea0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000345 R14: 00000000006f9f18 R15: 0000000000000000
+================================================================================
+audit: type=1326 audit(1529699125.623:4): auid=4294967295 uid=0 gid=0 ses=4294967295 subj=kernel pid=7497 comm="syz-executor1" exe="/syz-executor1" sig=31 arch=c000003e syscall=202 compat=0 ip=0x455a09 code=0x0
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=34692 sclass=netlink_route_socket pig=7538 comm=syz-executor0
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 00 00 00 08 00
+print_req_error: I/O error, dev sr0, sector 0
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 08 00 00 10 00
+print_req_error: I/O error, dev sr0, sector 32
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 1e 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 120
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Illegal Request [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Invalid command operation code
+sr 1:0:0:0: [sr0] tag#0 CDB: Write(10) 2a 00 00 00 00 00 00 00 1c 00
+print_req_error: critical target error, dev sr0, sector 0
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+isofs_fill_super: bread failed, dev=loop1, iso_blknum=32, block=64
+isofs_fill_super: bread failed, dev=loop1, iso_blknum=32, block=64

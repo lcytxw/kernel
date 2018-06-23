@@ -1,0 +1,36 @@
+executing program
+syzkaller login: [   16.395122] ================================================================================
+[   16.400490] UBSAN: Undefined behaviour in fs/iomap.c:726:9
+[   16.404399] signed integer overflow:
+[   16.406595] 0 - -9223372036854775808 cannot be represented in type 'long long int'
+[   16.411401] CPU: 0 PID: 2715 Comm: syz-executor041 Not tainted 4.18.0-rc1 #2
+[   16.415928] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   16.423524] Call Trace:
+[   16.425527]  dump_stack+0x122/0x1c8
+[   16.427833]  ? show_regs_print_info+0x18/0x18
+[   16.430338]  ubsan_epilogue+0x12/0x86
+[   16.432793]  handle_overflow+0x1c2/0x21f
+[   16.435227]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   16.439274]  ? putname+0x167/0x1a0
+[   16.441644]  ? rcu_note_context_switch+0x400/0x400
+[   16.444314]  ? putname+0x167/0x1a0
+[   16.447095]  ? kasan_slab_free+0xe/0x10
+[   16.450579]  ? kmem_cache_free+0xdc/0x3a0
+[   16.453005]  ? _cond_resched+0x1c/0x90
+[   16.455408]  __ubsan_handle_sub_overflow+0x2a/0x31
+[   16.458056]  iomap_seek_hole+0x12a/0x150
+[   16.460482]  ext4_llseek+0x281/0x3c0
+[   16.462803]  ? ext4_es_unregister_shrinker+0x40/0x40
+[   16.466754]  ksys_lseek+0xdb/0x170
+[   16.469020]  __x64_sys_lseek+0x81/0xd0
+[   16.471367]  do_syscall_64+0xb8/0x3a0
+[   16.473727]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   16.476402] RIP: 0033:0x43fcb9
+[   16.479205] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   16.490637] RSP: 002b:00007fff5e9452d8 EFLAGS: 00000213 ORIG_RAX: 0000000000000008
+[   16.496334] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fcb9
+[   16.500924] RDX: 0000000000000004 RSI: 8000000000000000 RDI: 0000000000000003
+[   16.505486] RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+[   16.510074] R10: 00000000004002c8 R11: 0000000000000213 R12: 00000000004015e0
+[   16.514194] R13: 0000000000401670 R14: 0000000000000000 R15: 0000000000000000
+[   16.518370] ================================================================================

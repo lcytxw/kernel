@@ -1,0 +1,87 @@
+1069 programs, 1 VMs
+extracting reproducer from 1038 programs
+single: executing 2 programs separately with timeout 10s
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-ioctl$DRM_IOCTL_MODE_GETRESOURCES-getsockopt$inet_sctp_SCTP_PRIMARY_ADDR-write$cgroup_type-syz_open_procfs-fadvise64-openat$selinux_avc_hash_stats
+program did not crash
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-setsockopt$inet_sctp6_SCTP_PEER_ADDR_PARAMS-write$cgroup_type-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+single: successfully extracted reproducer
+found reproducer with 4 syscalls
+minimizing guilty program
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-setsockopt$inet_sctp6_SCTP_PEER_ADDR_PARAMS-write$cgroup_type
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-setsockopt$inet_sctp6_SCTP_PEER_ADDR_PARAMS-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): fadvise64
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+simplifying C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:false EnableNetdev:true ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:true EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:true}): creat-fadvise64
+program crashed: UBSAN: Undefined behaviour in mm/fadvise.c:LINE
+reproducing took 6m0.373089061s
+repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in mm/fadvise.c:76:10
+signed integer overflow:
+4 + 9223372036854775805 cannot be represented in type 'long long int'
+CPU: 0 PID: 2711 Comm: syz-executor220 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ handle_overflow+0x1c2/0x21f
+ __ubsan_handle_add_overflow+0x2a/0x31
+ ksys_fadvise64_64+0xbf0/0xd10
+ __x64_sys_fadvise64+0xa9/0x120
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fcb9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffe01201008 EFLAGS: 00000213 ORIG_RAX: 00000000000000dd
+RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fcb9
+RDX: 7ffffffffffffffd RSI: 0000000000000004 RDI: 0000000000000003
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 0000000000000004 R11: 0000000000000213 R12: 00000000004015e0
+R13: 0000000000401670 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+
+final repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in mm/fadvise.c:76:10
+signed integer overflow:
+4 + 9223372036854775805 cannot be represented in type 'long long int'
+CPU: 0 PID: 2711 Comm: syz-executor220 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ handle_overflow+0x1c2/0x21f
+ __ubsan_handle_add_overflow+0x2a/0x31
+ ksys_fadvise64_64+0xbf0/0xd10
+ __x64_sys_fadvise64+0xa9/0x120
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fcb9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffe01201008 EFLAGS: 00000213 ORIG_RAX: 00000000000000dd
+RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fcb9
+RDX: 7ffffffffffffffd RSI: 0000000000000004 RDI: 0000000000000003
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 0000000000000004 R11: 0000000000000213 R12: 00000000004015e0
+R13: 0000000000401670 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+

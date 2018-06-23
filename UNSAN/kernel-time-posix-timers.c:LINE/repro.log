@@ -1,0 +1,44 @@
+
+Debian GNU/Linux 7 syzkaller ttyS0
+
+executing program
+syzkaller login: [   13.680596] ================================================================================
+[   13.682618] UBSAN: Undefined behaviour in kernel/time/posix-timers.c:705:20
+[   13.684241] signed integer overflow:
+[   13.685072] -1650759140 + -1650759139 cannot be represented in type 'int'
+[   13.686623] CPU: 0 PID: 2714 Comm: syz-executor391 Not tainted 4.18.0-rc1 #2
+[   13.688235] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.690745] Call Trace:
+[   13.691305]  dump_stack+0x122/0x1c8
+[   13.692073]  ? show_regs_print_info+0x18/0x18
+[   13.693034]  ubsan_epilogue+0x12/0x86
+[   13.693834]  handle_overflow+0x1c2/0x21f
+[   13.694689]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   13.695853]  ? ktime_get_real_ts64+0x1df/0x340
+[   13.696824]  ? hrtimer_forward+0x1af/0x3f0
+[   13.697716]  __ubsan_handle_add_overflow+0x2a/0x31
+[   13.698751]  common_timer_get+0x55a/0x670
+[   13.699637]  ? posix_get_coarse_res+0x50/0x50
+[   13.700589]  ? __lock_timer+0x18b/0x340
+[   13.701419]  common_timer_set+0x68/0x570
+[   13.702274]  ? __lock_timer+0x216/0x340
+[   13.703114]  ? common_timer_get+0x670/0x670
+[   13.704021]  do_timer_settime+0x255/0x350
+[   13.704903]  ? do_timer_gettime+0x190/0x190
+[   13.705811]  __x64_sys_timer_settime+0x1a0/0x270
+[   13.706812]  ? __x64_sys_timer_create+0x1f0/0x1f0
+[   13.707827]  ? __x64_sys_sched_getparam+0x220/0x220
+[   13.708891]  ? __switch_to+0x4f7/0xf10
+[   13.709720]  ? entry_SYSCALL_64_after_hwframe+0x3e/0xbe
+[   13.710837]  ? do_syscall_64+0xb8/0x3a0
+[   13.711665]  do_syscall_64+0xb8/0x3a0
+[   13.712473]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.713561] RIP: 0033:0x4455a9
+[   13.714228] Code: e8 4c b6 02 00 48 83 c4 18 c3 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb 51 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.718255] RSP: 002b:00007f63199b2db8 EFLAGS: 00000246 ORIG_RAX: 00000000000000df
+[   13.719938] RAX: ffffffffffffffda RBX: 00000000006dac3c RCX: 00000000004455a9
+[   13.721480] RDX: 0000000020000200 RSI: 0000000000000000 RDI: 0000000000000000
+[   13.722999] RBP: 00000000006dac38 R08: 00007f63199b3700 R09: 0000000000000000
+[   13.724519] R10: 0000000020000240 R11: 0000000000000246 R12: 0000000000000000
+[   13.726078] R13: 00007ffd38e4a59f R14: 00007f63199b39c0 R15: 0000000000000003
+[   13.727592] ================================================================================

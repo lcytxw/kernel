@@ -1,0 +1,111 @@
+
+Debian GNU/Linux 7 syzkaller ttyS0
+
+executing program
+syzkaller login: [   15.622143] ================================================================================
+[   15.632392] UBSAN: Undefined behaviour in net/sunrpc/xprt.c:568:22
+[   15.633661] shift exponent 536870976 is too large for 64-bit type 'long unsigned int'
+[   15.635255] CPU: 0 PID: 2709 Comm: syz-executor131 Not tainted 4.18.0-rc1 #2
+[   15.636689] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   15.639072] Call Trace:
+[   15.639604]  dump_stack+0x122/0x1c8
+[   15.640336]  ? show_regs_print_info+0x18/0x18
+[   15.641240]  ubsan_epilogue+0x12/0x86
+[   15.642006]  __ubsan_handle_shift_out_of_bounds+0x29a/0x2ff
+[   15.651551]  ? deref_stack_reg+0xbd/0x120
+[   15.652396]  ? __ubsan_handle_load_invalid_value+0x1bc/0x1bc
+[   15.653578]  ? deref_stack_reg+0x120/0x120
+[   15.654430]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   15.655518]  ? unwind_next_frame+0xea6/0x2e50
+[   15.656434]  ? xprt_alloc_slot+0x2c1/0x970
+[   15.657288]  ? xprt_reset_majortimeo+0x323/0x440
+[   15.658253]  xprt_reset_majortimeo+0x323/0x440
+[   15.659187]  xprt_request_init+0x4d2/0x730
+[   15.668446]  ? xprt_retry_reserve+0x200/0x200
+[   15.669365]  ? xprt_reserve+0x10f/0x3c0
+[   15.670178]  ? xprt_transmit+0xde0/0xde0
+[   15.671013]  ? call_reserve+0xa0/0xa0
+[   15.671784]  call_reserveresult+0x9d/0x240
+[   15.672644]  ? call_reserve+0xa0/0xa0
+[   15.673412]  __rpc_execute+0x23a/0xc20
+[   15.674206]  ? rpc_wake_up_queued_task+0xa0/0xa0
+[   15.675176]  ? rpc_make_runnable+0xa3/0x2b0
+[   15.676062]  ? rpc_exit_task+0x2f0/0x2f0
+[   15.676893]  ? rpcauth_release+0xd0/0xd0
+[   15.693859]  ? idr_replace+0x1d0/0x1d0
+[   15.694656]  rpc_execute+0xf5/0x250
+[   15.695410]  rpc_run_task+0x4a1/0x9f0
+[   15.696184]  ? rpc_killall_tasks+0x3e0/0x3e0
+[   15.697077]  ? rpc_xprt_switch_has_addr+0x50/0x50
+[   15.698062]  ? rpc_init_pipe_dir_head+0x6b/0x160
+[   15.699026]  rpc_call_sync+0xcf/0x1a0
+[   15.699799]  ? rpc_call_sync.part.7+0x30/0x30
+[   15.700708]  ? rpc_client_register+0x7b0/0x7b0
+[   15.701634]  rpc_ping+0xde/0x140
+[   15.710684]  ? rpc_call_sync+0x1a0/0x1a0
+[   15.711523]  ? ftrace_graph_ret_addr+0x41/0x1f0
+[   15.712465]  ? deref_stack_reg+0x120/0x120
+[   15.713323]  rpc_create_xprt+0x1e8/0x590
+[   15.714145]  rpc_create+0x3a9/0x600
+[   15.714880]  ? rpc_create_xprt+0x590/0x590
+[   15.715742]  ? kasan_unpoison_shadow+0x36/0x50
+[   15.716673]  ? generic_lookup_cred+0x2e/0x40
+[   15.717564]  ? rpc_lookup_machine_cred+0xdb/0x130
+[   15.727093]  ? generic_key_to_expire+0x90/0x90
+[   15.728024]  ? nfs_alloc_client+0x337/0x7c0
+[   15.728900]  nfs_create_rpc_client+0x3a1/0x4d0
+[   15.729833]  ? nfs_mark_client_ready+0x80/0x80
+[   15.730759]  ? save_stack+0xb5/0xd0
+[   15.731518]  nfs_init_client+0x7b/0x100
+[   15.732318]  nfs_get_client+0xa74/0x1440
+[   15.733141]  ? ksys_mount+0xb0/0x120
+[   15.733893]  ? __x64_sys_mount+0xcc/0x170
+[   15.734732]  ? do_syscall_64+0xb8/0x3a0
+[   15.744795]  ? nfs_init_client+0x100/0x100
+[   15.745656]  ? __rpc_init_priority_wait_queue+0x284/0x450
+[   15.746777]  ? nfs_init_timeout_values+0x202/0x500
+[   15.747781]  nfs_init_server+0x236/0xdf0
+[   15.748605]  ? nfs_free_server+0x1b0/0x1b0
+[   15.749461]  ? kasan_kmalloc+0xad/0xe0
+[   15.750244]  nfs_create_server+0x9a/0x750
+[   15.751088]  ? nfs_try_mount+0x270/0xaf0
+[   15.751910]  nfs_try_mount+0x270/0xaf0
+[   15.761453]  ? nfs_request_mount.constprop.10+0x6c0/0x6c0
+[   15.762586]  ? find_nfs_version+0x143/0x1f0
+[   15.763474]  ? __module_get+0x120/0x120
+[   15.764284]  ? __kmalloc_track_caller+0x120/0x3b0
+[   15.765261]  ? nfs_fs_mount+0x1e6c/0x30e0
+[   15.766103]  nfs_fs_mount+0x151f/0x30e0
+[   15.766913]  ? nfs_fill_super+0x610/0x610
+[   15.767756]  ? alloc_vfsmnt+0x700/0xa70
+[   15.768561]  ? nfs_clone_super+0x4e0/0x4e0
+[   15.769415]  ? param_set_portnr+0x1a0/0x1a0
+[   15.770291]  ? mnt_get_writers+0x200/0x200
+[   15.779574]  ? mount_fs+0xaf/0x330
+[   15.780305]  ? nfs_fill_super+0x610/0x610
+[   15.781138]  mount_fs+0xaf/0x330
+[   15.781823]  vfs_kern_mount+0xfc/0x4d0
+[   15.782606]  ? commit_tree+0x650/0x650
+[   15.783399]  ? find_filesystem+0xbf/0x120
+[   15.784240]  ? kasan_check_write+0x14/0x20
+[   15.785099]  do_mount+0x46f/0x2fa0
+[   15.785813]  ? copy_mount_string+0x40/0x40
+[   15.786669]  ? retint_kernel+0x10/0x10
+[   15.795884]  ? trace_hardirqs_on_caller+0x58/0x160
+[   15.796895]  ? trace_hardirqs_on_thunk+0x1a/0x1c
+[   15.797844]  ? retint_kernel+0x10/0x10
+[   15.798635]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   15.799731]  ? copy_mount_options+0x208/0x3b0
+[   15.800641]  ksys_mount+0xb0/0x120
+[   15.801355]  __x64_sys_mount+0xcc/0x170
+[   15.802154]  do_syscall_64+0xb8/0x3a0
+[   15.802922]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   15.813335] RIP: 0033:0x43fe09
+[   15.813990] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   15.817870] RSP: 002b:00007ffee955ff78 EFLAGS: 00000286 ORIG_RAX: 00000000000000a5
+[   15.819436] RAX: ffffffffffffffda RBX: 0030656c69662f2e RCX: 000000000043fe09
+[   15.820898] RDX: 00000000200001c0 RSI: 0000000020000100 RDI: 0000000020000200
+[   15.822355] RBP: 00000000006ca018 R08: 0000000020000180 R09: 00000000004002c8
+[   15.823832] R10: 0000000000000000 R11: 0000000000000286 R12: 0000000000401730
+[   15.825567] R13: 00000000004017c0 R14: 0000000000000000 R15: 0000000000000000
+[   15.827042] ================================================================================

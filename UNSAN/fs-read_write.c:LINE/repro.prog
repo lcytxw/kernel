@@ -1,0 +1,5 @@
+# {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:false}
+mkdir(&(0x7f0000000080)='./file0\x00', 0x0)
+r0 = open$dir(&(0x7f0000000040)='./file0\x00', 0x0, 0x0)
+getdents64(r0, &(0x7f00000004c0)=""/93, 0x5d)
+lseek(r0, 0x56, 0x1)

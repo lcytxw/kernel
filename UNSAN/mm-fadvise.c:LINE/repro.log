@@ -1,0 +1,32 @@
+executing program
+syzkaller login: [   13.183721] ================================================================================
+[   13.185626] UBSAN: Undefined behaviour in mm/fadvise.c:76:10
+[   13.186982] signed integer overflow:
+[   13.187839] 4 + 9223372036854775805 cannot be represented in type 'long long int'
+[   13.189498] CPU: 0 PID: 2711 Comm: syz-executor220 Not tainted 4.18.0-rc1 #2
+[   13.191041] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.193607] Call Trace:
+[   13.194190]  dump_stack+0x122/0x1c8
+[   13.195003]  ? show_regs_print_info+0x18/0x18
+[   13.196056]  ubsan_epilogue+0x12/0x86
+[   13.196887]  handle_overflow+0x1c2/0x21f
+[   13.197802]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   13.199010]  ? putname+0x167/0x1a0
+[   13.199797]  ? kasan_slab_free+0xe/0x10
+[   13.200661]  __ubsan_handle_add_overflow+0x2a/0x31
+[   13.201766]  ksys_fadvise64_64+0xbf0/0xd10
+[   13.202687]  ? kzalloc_node.constprop.4+0x31/0x31
+[   13.203741]  ? filp_open+0x70/0x70
+[   13.204523]  ? entry_SYSCALL_64_after_hwframe+0x3e/0xbe
+[   13.205703]  __x64_sys_fadvise64+0xa9/0x120
+[   13.206648]  do_syscall_64+0xb8/0x3a0
+[   13.207476]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.208615] RIP: 0033:0x43fcb9
+[   13.209326] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.213455] RSP: 002b:00007ffe01201008 EFLAGS: 00000213 ORIG_RAX: 00000000000000dd
+[   13.215130] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fcb9
+[   13.216674] RDX: 7ffffffffffffffd RSI: 0000000000000004 RDI: 0000000000000003
+[   13.218251] RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+[   13.219810] R10: 0000000000000004 R11: 0000000000000213 R12: 00000000004015e0
+[   13.221392] R13: 0000000000401670 R14: 0000000000000000 R15: 0000000000000000
+[   13.222943] ================================================================================

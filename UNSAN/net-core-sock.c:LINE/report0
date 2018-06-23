@@ -1,0 +1,28 @@
+================================================================================
+UBSAN: Undefined behaviour in net/core/sock.c:793:19
+signed integer overflow:
+-1704733899 * 2 cannot be represented in type 'int'
+CPU: 0 PID: 6561 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ __ubsan_handle_mul_overflow+0x2a/0x38 lib/ubsan.c:214
+ sock_setsockopt+0x17f1/0x1c80 net/core/sock.c:793
+ __sys_setsockopt+0x23f/0x2a0 net/socket.c:1943
+ __do_sys_setsockopt net/socket.c:1958 [inline]
+ __se_sys_setsockopt net/socket.c:1955 [inline]
+ __x64_sys_setsockopt+0xcc/0x170 net/socket.c:1955
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007f299a11fc68 EFLAGS: 00000246 ORIG_RAX: 0000000000000036
+RAX: ffffffffffffffda RBX: 00007f299a1206d4 RCX: 0000000000455a09
+RDX: 0000000000000021 RSI: 0000000000000001 RDI: 0000000000000014
+RBP: 000000000072bea0 R08: 0000000000000004 R09: 0000000000000000
+R10: 0000000020000000 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 00000000000006dc R14: 00000000006ff540 R15: 0000000000000000
+================================================================================

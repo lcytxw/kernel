@@ -1,0 +1,3 @@
+# {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:false}
+r0 = syz_open_dev$sndseq(&(0x7f0000000040)='/dev/snd/seq\x00', 0x0, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_QUERY_NEXT_CLIENT(r0, 0xc0bc5351, &(0x7f00000001c0)={0x7fffffff, 0x1, 'client0\x00', 0x2, "08f5910cf69bfb4f", "987db3fde3beffe68f00a76ff4ae652dd62f3d3e7b79370c92747fe08d5d3f5e", 0x59b, 0x5})

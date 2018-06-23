@@ -1,0 +1,40 @@
+
+Debian GNU/Linux 7 syzkaller ttyS0
+
+executing program
+syzkaller login: [   13.583751] ================================================================================
+[   13.585539] UBSAN: Undefined behaviour in net/core/sock.c:793:19
+[   13.586916] signed integer overflow:
+[   13.587696] -1704733899 * 2 cannot be represented in type 'int'
+[   13.588957] CPU: 0 PID: 2705 Comm: syz-executor799 Not tainted 4.18.0-rc1 #2
+[   13.590424] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.592839] Call Trace:
+[   13.593410]  dump_stack+0x122/0x1c8
+[   13.594172]  ? show_regs_print_info+0x18/0x18
+[   13.595128]  ubsan_epilogue+0x12/0x86
+[   13.595935]  handle_overflow+0x1c2/0x21f
+[   13.596795]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   13.597960]  ? lock_sock_nested+0x131/0x1f0
+[   13.598867]  ? security_capable+0x96/0xd0
+[   13.599740]  __ubsan_handle_mul_overflow+0x2a/0x38
+[   13.600774]  sock_setsockopt+0x17f1/0x1c80
+[   13.601656]  ? sock_enable_timestamp+0xd0/0xd0
+[   13.602615]  ? sock_has_perm+0x232/0x3d0
+[   13.603476]  ? selinux_netlbl_socket_setsockopt+0x13b/0x3d0
+[   13.604660]  ? selinux_netlbl_sock_rcv_skb+0x460/0x460
+[   13.605759]  ? security_socket_setsockopt+0x91/0xd0
+[   13.606806]  __sys_setsockopt+0x23f/0x2a0
+[   13.607678]  ? sockfd_lookup_light+0x1e0/0x1e0
+[   13.608648]  ? entry_SYSCALL_64_after_hwframe+0x3e/0xbe
+[   13.609752]  __x64_sys_setsockopt+0xcc/0x170
+[   13.610677]  do_syscall_64+0xb8/0x3a0
+[   13.611488]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.612563] RIP: 0033:0x43fcb9
+[   13.613236] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.617154] RSP: 002b:00007ffdfac74bf8 EFLAGS: 00000213 ORIG_RAX: 0000000000000036
+[   13.618734] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fcb9
+[   13.620227] RDX: 0000000000000021 RSI: 0000000000000001 RDI: 0000000000000003
+[   13.621717] RBP: 00000000006ca018 R08: 0000000000000004 R09: 00000000004002c8
+[   13.623226] R10: 0000000020000000 R11: 0000000000000213 R12: 00000000004015e0
+[   13.624729] R13: 0000000000401670 R14: 0000000000000000 R15: 0000000000000000
+[   13.626220] ================================================================================

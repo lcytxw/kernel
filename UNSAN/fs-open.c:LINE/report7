@@ -1,0 +1,39 @@
+================================================================================
+UBSAN: Undefined behaviour in fs/open.c:312:15
+signed integer overflow:
+9223372036854775806 + 65533 cannot be represented in type 'long long int'
+CPU: 0 PID: 7772 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ __ubsan_handle_add_overflow+0x2a/0x31 lib/ubsan.c:198
+ vfs_fallocate+0x6da/0x880 fs/open.c:312
+ ksys_fallocate+0x4b/0x80 fs/open.c:342
+ __do_sys_fallocate fs/open.c:350 [inline]
+ __se_sys_fallocate fs/open.c:348 [inline]
+ __x64_sys_fallocate+0xa9/0x120 fs/open.c:348
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007f756b4a0c68 EFLAGS: 00000246 ORIG_RAX: 000000000000011d
+RAX: ffffffffffffffda RBX: 00007f756b4a16d4 RCX: 0000000000455a09
+RDX: 7ffffffffffffffe RSI: 0000000000000000 RDI: 0000000000000013
+RBP: 000000000072bea0 R08: 0000000000000000 R09: 0000000000000000
+R10: 000000000000fffd R11: 0000000000000246 R12: 00000000ffffffff
+R13: 000000000000007e R14: 00000000006f5c70 R15: 0000000000000000
+================================================================================
+netlink: 56 bytes leftover after parsing attributes in process `syz-executor1'.
+netlink: 56 bytes leftover after parsing attributes in process `syz-executor1'.
+FAT-fs (loop0): Unrecognized mount option ")¤ùQ" or missing value
+FAT-fs (loop0): Unrecognized mount option ")¤ùQ" or missing value
+EXT4-fs (sda): re-mounted. Opts: resuid=6,
+EXT4-fs (sda): re-mounted. Opts: resuid=6,
+FAT-fs (loop1): bogus number of reserved sectors
+FAT-fs (loop1): Can't find a valid FAT filesystem
+FAT-fs (loop1): Unrecognized mount option "/dev/snapshot" or missing value
+FAT-fs (loop1): Unrecognized mount option "er~ors=continue" or missing value
+FAT-fs (loop1): Unrecognized mount option "er~ors=continue" or missing value

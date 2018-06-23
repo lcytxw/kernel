@@ -1,0 +1,105 @@
+210 programs, 1 VMs
+extracting reproducer from 88 programs
+single: executing 2 programs separately with timeout 10s
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-accept$nfc_llcp-getpeername-socket$inet_tcp-openat$selinux_avc_cache_threshold-getsockopt$inet_sctp6_SCTP_GET_PEER_ADDRS-getsockopt$inet_sctp_SCTP_AUTH_ACTIVE_KEY-setsockopt$inet_tcp_int
+program did not crash
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64-lseek-getdents64-accept-socketpair$inet_smc-getsockopt$inet_sctp6_SCTP_SOCKOPT_PEELOFF-getsockopt$inet_sctp_SCTP_PR_SUPPORTED
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+single: successfully extracted reproducer
+found reproducer with 11 syscalls
+minimizing guilty program
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64-lseek-getdents64-accept-socketpair$inet_smc-getsockopt$inet_sctp6_SCTP_SOCKOPT_PEELOFF
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64-lseek-getdents64-accept-socketpair$inet_smc
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64-lseek-getdents64-accept
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64-lseek-getdents64
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-getdents64
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-open$dir-lseek
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-mkdir-getdents64-lseek
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-getsockopt$inet_sctp_SCTP_INITMSG-open$dir-getdents64-lseek
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): accept4$inet-mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+extracting C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+simplifying C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:false EnableNetdev:true ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:true EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:true}): mkdir-open$dir-getdents64-lseek
+program crashed: UBSAN: Undefined behaviour in fs/read_write.c:LINE
+reproducing took 9m43.77761838s
+repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in fs/read_write.c:108:12
+signed integer overflow:
+9223372036854775807 + 86 cannot be represented in type 'long long int'
+CPU: 0 PID: 2717 Comm: syz-executor918 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ handle_overflow+0x1c2/0x21f
+ __ubsan_handle_add_overflow+0x2a/0x31
+ generic_file_llseek_size+0x4f6/0x560
+ ext4_dir_llseek+0xf7/0x290
+ ksys_lseek+0xdb/0x170
+ __x64_sys_lseek+0x81/0xd0
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fcf9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffeb6bf5758 EFLAGS: 00000213 ORIG_RAX: 0000000000000008
+RAX: ffffffffffffffda RBX: 0030656c69662f2e RCX: 000000000043fcf9
+RDX: 0000000000000001 RSI: 0000000000000056 RDI: 0000000000000003
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 00000000004002c8 R11: 0000000000000213 R12: 0000000000401620
+R13: 00000000004016b0 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+
+final repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in fs/read_write.c:108:12
+signed integer overflow:
+9223372036854775807 + 86 cannot be represented in type 'long long int'
+CPU: 0 PID: 2717 Comm: syz-executor918 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ handle_overflow+0x1c2/0x21f
+ __ubsan_handle_add_overflow+0x2a/0x31
+ generic_file_llseek_size+0x4f6/0x560
+ ext4_dir_llseek+0xf7/0x290
+ ksys_lseek+0xdb/0x170
+ __x64_sys_lseek+0x81/0xd0
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fcf9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffeb6bf5758 EFLAGS: 00000213 ORIG_RAX: 0000000000000008
+RAX: ffffffffffffffda RBX: 0030656c69662f2e RCX: 000000000043fcf9
+RDX: 0000000000000001 RSI: 0000000000000056 RDI: 0000000000000003
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 00000000004002c8 R11: 0000000000000213 R12: 0000000000401620
+R13: 00000000004016b0 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+

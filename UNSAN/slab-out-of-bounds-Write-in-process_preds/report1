@@ -1,0 +1,92 @@
+==================================================================
+BUG: KASAN: slab-out-of-bounds in predicate_parse kernel/trace/trace_events_filter.c:557 [inline]
+BUG: KASAN: slab-out-of-bounds in process_preds+0x46b7/0x4a70 kernel/trace/trace_events_filter.c:1509
+Write of size 4 at addr ffff88006747cd10 by task syz-executor1/5588
+
+CPU: 0 PID: 5588 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ print_address_description+0x88/0x3b0 mm/kasan/report.c:256
+ kasan_report_error mm/kasan/report.c:354 [inline]
+ kasan_report+0x185/0x4a0 mm/kasan/report.c:412
+ __asan_report_store4_noabort+0x1c/0x20 mm/kasan/report.c:437
+ predicate_parse kernel/trace/trace_events_filter.c:557 [inline]
+ process_preds+0x46b7/0x4a70 kernel/trace/trace_events_filter.c:1509
+ create_filter+0x11d/0x1b0 kernel/trace/trace_events_filter.c:1717
+ ftrace_profile_set_filter+0x157/0x8f0 kernel/trace/trace_events_filter.c:2042
+ perf_event_set_filter+0x5d6/0xf80 kernel/events/core.c:9078
+ _perf_ioctl+0x243/0xa80 kernel/events/core.c:5059
+ perf_ioctl+0x5c/0xa0 kernel/events/core.c:5110
+ vfs_ioctl fs/ioctl.c:46 [inline]
+ do_vfs_ioctl+0x1e8/0x1340 fs/ioctl.c:686
+ ksys_ioctl+0x9c/0xb0 fs/ioctl.c:701
+ __do_sys_ioctl fs/ioctl.c:708 [inline]
+ __se_sys_ioctl fs/ioctl.c:706 [inline]
+ __x64_sys_ioctl+0x81/0xd0 fs/ioctl.c:706
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007f9ea57cbc68 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00007f9ea57cc6d4 RCX: 0000000000455a09
+RDX: 0000000020000000 RSI: 0000000040082406 RDI: 0000000000000014
+RBP: 000000000072bea0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 00000000000002eb R14: 00000000006f96a8 R15: 0000000000000000
+
+Allocated by task 2780:
+ save_stack+0x46/0xd0 mm/kasan/kasan.c:448
+ set_track mm/kasan/kasan.c:460 [inline]
+ kasan_kmalloc+0xad/0xe0 mm/kasan/kasan.c:553
+ kmem_cache_alloc_trace+0x16e/0x370 mm/slub.c:2735
+ kmalloc include/linux/slab.h:513 [inline]
+ sock_alloc_inode+0xbd/0x320 net/socket.c:250
+ alloc_inode+0x7a/0x200 fs/inode.c:210
+ new_inode_pseudo+0x97/0x220 fs/inode.c:895
+ sock_alloc+0x4b/0x2f0 net/socket.c:571
+ __sock_create+0xbb/0x5b0 net/socket.c:1286
+ sock_create net/socket.c:1362 [inline]
+ __sys_socket+0x111/0x280 net/socket.c:1392
+ __do_sys_socket net/socket.c:1401 [inline]
+ __se_sys_socket net/socket.c:1399 [inline]
+ __x64_sys_socket+0x81/0xd0 net/socket.c:1399
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+
+Freed by task 9:
+ save_stack+0x46/0xd0 mm/kasan/kasan.c:448
+ set_track mm/kasan/kasan.c:460 [inline]
+ __kasan_slab_free+0x137/0x180 mm/kasan/kasan.c:521
+ kasan_slab_free+0xe/0x10 mm/kasan/kasan.c:528
+ slab_free_hook mm/slub.c:1373 [inline]
+ slab_free_freelist_hook mm/slub.c:1400 [inline]
+ slab_free mm/slub.c:2955 [inline]
+ kfree+0x108/0x3f0 mm/slub.c:3908
+ __rcu_reclaim kernel/rcu/rcu.h:173 [inline]
+ rcu_do_batch kernel/rcu/tree.c:2558 [inline]
+ invoke_rcu_callbacks kernel/rcu/tree.c:2818 [inline]
+ __rcu_process_callbacks kernel/rcu/tree.c:2785 [inline]
+ rcu_process_callbacks+0xa69/0x34e0 kernel/rcu/tree.c:2802
+ __do_softirq+0x297/0xa4d kernel/softirq.c:284
+
+The buggy address belongs to the object at ffff88006747ccc0
+ which belongs to the cache kmalloc-64 of size 64
+The buggy address is located 16 bytes to the right of
+ 64-byte region [ffff88006747ccc0, ffff88006747cd00)
+The buggy address belongs to the page:
+page:ffffea00019d1f00 count:1 mapcount:0 mapping:ffff88006c4018c0 index:0x0
+flags: 0x100000000000100(slab)
+raw: 0100000000000100 ffffea00019fd1c0 0000001600000016 ffff88006c4018c0
+raw: 0000000000000000 00000000802a002a 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff88006747cc00: fb fb fb fb fb fb fb fb fc fc fc fc fb fb fb fb
+ ffff88006747cc80: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+>ffff88006747cd00: fc fc fc fc 00 00 00 00 00 00 fc fc fc fc fc fc
+                         ^
+ ffff88006747cd80: fb fb fb fb fb fb fb fb fc fc fc fc fb fb fb fb
+ ffff88006747ce00: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+==================================================================

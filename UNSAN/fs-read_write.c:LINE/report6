@@ -1,0 +1,74 @@
+================================================================================
+UBSAN: Undefined behaviour in fs/read_write.c:108:12
+signed integer overflow:
+9223372036854775807 + 86 cannot be represented in type 'long long int'
+CPU: 0 PID: 4646 Comm: syz-executor0 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ ? 0xffffffffa0000077
+ __ubsan_handle_add_overflow+0x2a/0x31 lib/ubsan.c:198
+ generic_file_llseek_size+0x4f6/0x560 fs/read_write.c:108
+ ext4_dir_llseek+0xf7/0x290 fs/ext4/dir.c:371
+ vfs_llseek fs/read_write.c:300 [inline]
+ ksys_lseek+0xdb/0x170 fs/read_write.c:313
+ __do_sys_lseek fs/read_write.c:324 [inline]
+ __se_sys_lseek fs/read_write.c:322 [inline]
+ __x64_sys_lseek+0x81/0xd0 fs/read_write.c:322
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007fd7ae0a7c68 EFLAGS: 00000246 ORIG_RAX: 0000000000000008
+RAX: ffffffffffffffda RBX: 00007fd7ae0a86d4 RCX: 0000000000455a09
+RDX: 0000000000000001 RSI: 0000000000000056 RDI: 0000000000000013
+RBP: 000000000072bea0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 00000000000004b8 R14: 00000000006fc1e0 R15: 0000000000000000
+================================================================================
+sched: DL replenish lagged too much
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=4002 sclass=netlink_route_socket pig=4679 comm=syz-executor1
+FAT-fs (loop1): Unrecognized mount option "fdÿjh¶=]ßontinTΩd0u…se" or missing value
+FAT-fs (loop1): Unrecognized mount option "fdÿjh¶=]ßontinTΩd0u…se" or missing value
+FAT-fs (loop0): bogus number of reserved sectors
+FAT-fs (loop0): Can't find a valid FAT filesystem
+FAT-fs (loop0): bogus number of reserved sectors
+FAT-fs (loop0): Can't find a valid FAT filesystem
+sd 0:0:0:0: [sg0] tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK
+sd 0:0:0:0: [sg0] tag#0 CDB: Test Unit Ready
+sd 0:0:0:0: [sg0] tag#0 CDB[00]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 69
+sd 0:0:0:0: [sg0] tag#0 CDB[10]: e4 67 f3 54 93 1d 60 a0 48 92 2e cb 82 47 f5 1b
+sd 0:0:0:0: [sg0] tag#0 CDB[20]: 35 58 40 eb 73 80 f6 f8 3e 18 8f 3f 12 0a 62 dc
+sd 0:0:0:0: [sg0] tag#0 CDB[30]: 72 14 b9 5a f5 44 c4 2b bc b0 eb 45 e0 4f 5c 84
+sd 0:0:0:0: [sg0] tag#0 CDB[40]: 8e 4b 11 7d cb c1 08 ad 34 93 53 6f f3 f4 74 00
+sd 0:0:0:0: [sg0] tag#0 CDB[50]: 86 83 02 34 66 53 ba 25 a7 d9 59 4d 52 ab 42 db
+sd 0:0:0:0: [sg0] tag#0 CDB[60]: 06 00 00 00 00 00 00 d0 2d 7b e6 bc 6a 92 d8 46
+sd 0:0:0:0: [sg0] tag#0 CDB[70]: e7 e8 1d d5 7f 9b 3e 6a 44 5b 71 e5 32 ba 1c 2e
+sd 0:0:0:0: [sg0] tag#0 CDB[80]: f1 df 00 00 bb 38 09 00 8f 5c 28 57 a5 0b e9 66
+sd 0:0:0:0: [sg0] tag#0 CDB[90]: 5f d2 6f 19 67 e9 c5 ed 19 86 84 df 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[b0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[c0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[d0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[e0]: 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK
+sd 0:0:0:0: [sg0] tag#0 CDB: Test Unit Ready
+sd 0:0:0:0: [sg0] tag#0 CDB[00]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 69
+sd 0:0:0:0: [sg0] tag#0 CDB[10]: e4 67 f3 54 93 1d 60 a0 48 92 2e cb 82 47 f5 1b
+sd 0:0:0:0: [sg0] tag#0 CDB[20]: 35 58 40 eb 73 80 f6 f8 3e 18 8f 3f 12 0a 62 dc
+sd 0:0:0:0: [sg0] tag#0 CDB[30]: 72 14 b9 5a f5 44 c4 2b bc b0 eb 45 e0 4f 5c 84
+sd 0:0:0:0: [sg0] tag#0 CDB[40]: 8e 4b 11 7d cb c1 08 ad 34 93 53 6f f3 f4 74 00
+sd 0:0:0:0: [sg0] tag#0 CDB[50]: 86 83 02 34 66 53 ba 25 a7 d9 59 4d 52 ab 42 db
+sd 0:0:0:0: [sg0] tag#0 CDB[60]: 06 00 00 00 00 00 00 d0 2d 7b e6 bc 6a 92 d8 46
+sd 0:0:0:0: [sg0] tag#0 CDB[70]: e7 e8 1d d5 7f 9b 3e 6a 44 5b 71 e5 32 ba 1c 2e
+sd 0:0:0:0: [sg0] tag#0 CDB[80]: f1 df 00 00 bb 38 09 00 8f 5c 28 57 a5 0b e9 66
+sd 0:0:0:0: [sg0] tag#0 CDB[90]: 5f d2 6f 19 67 e9 c5 ed 19 86 84 df 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[b0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[c0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[d0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+sd 0:0:0:0: [sg0] tag#0 CDB[e0]: 00 00 00 00
+EXT4-fs (sda): Unrecognized mount option "j„" or missing value

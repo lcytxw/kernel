@@ -1,0 +1,233 @@
+734 programs, 1 VMs
+extracting reproducer from 734 programs
+single: executing 2 programs separately with timeout 10s
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-memfd_create-setsockopt$IP_VS_SO_SET_ZERO-readlinkat-munlockall-ioctl$PERF_EVENT_IOC_SET_FILTER-setsockopt$sock_linger
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+single: successfully extracted reproducer
+found reproducer with 8 syscalls
+minimizing guilty program
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-memfd_create-setsockopt$IP_VS_SO_SET_ZERO-readlinkat-munlockall-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-memfd_create-setsockopt$IP_VS_SO_SET_ZERO-readlinkat-munlockall
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-memfd_create-setsockopt$IP_VS_SO_SET_ZERO-readlinkat-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-memfd_create-setsockopt$IP_VS_SO_SET_ZERO-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-memfd_create-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): ioctl$PERF_EVENT_IOC_SET_FILTER
+program did not crash
+extracting C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+simplifying C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:false EnableNetdev:true ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:true EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:true}): perf_event_open-ioctl$PERF_EVENT_IOC_SET_FILTER
+program crashed: KASAN: slab-out-of-bounds Write in process_preds
+reproducing took 7m45.895745556s
+repro crashed as (corrupted=false):
+==================================================================
+BUG: KASAN: slab-out-of-bounds in process_preds+0x46b7/0x4a70
+Write of size 4 at addr ffff880068a8b2f0 by task syz-executor746/2708
+
+CPU: 0 PID: 2708 Comm: syz-executor746 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ print_address_description+0x88/0x3b0
+ kasan_report+0x185/0x4a0
+ __asan_report_store4_noabort+0x1c/0x20
+ process_preds+0x46b7/0x4a70
+ create_filter+0x11d/0x1b0
+ ftrace_profile_set_filter+0x157/0x8f0
+ perf_event_set_filter+0x5d6/0xf80
+ _perf_ioctl+0x243/0xa80
+ perf_ioctl+0x5c/0xa0
+ do_vfs_ioctl+0x1e8/0x1340
+ ksys_ioctl+0x9c/0xb0
+ __x64_sys_ioctl+0x81/0xd0
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fdb9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffc435cd278 EFLAGS: 00000213 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fdb9
+RDX: 0000000020000000 RSI: 0000000040082406 RDI: 0000000000000003
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 0000000000000000 R11: 0000000000000213 R12: 00000000004016e0
+R13: 0000000000401770 R14: 0000000000000000 R15: 0000000000000000
+
+Allocated by task 1136:
+ save_stack+0x46/0xd0
+ kasan_kmalloc+0xad/0xe0
+ kmem_cache_alloc_node_trace+0x1a1/0x380
+ __get_vm_area_node+0x121/0x4c0
+ __vmalloc_node_range+0xa9/0x6b0
+ vmalloc+0x74/0x90
+ n_tty_open+0x20/0x2d0
+ tty_ldisc_open+0x94/0x100
+ tty_ldisc_setup+0x95/0x110
+ tty_init_dev+0x20c/0x580
+ ptmx_open+0xfd/0x3a0
+ chrdev_open+0x319/0x6d0
+ do_dentry_open+0x7de/0xf50
+ vfs_open+0x15b/0x2a0
+ path_openat+0x11b0/0x4fa0
+ do_filp_open+0x1cd/0x2e0
+ do_sys_open+0x1fc/0x4f0
+ __x64_sys_open+0x8c/0xc0
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+
+Freed by task 1136:
+ save_stack+0x46/0xd0
+ __kasan_slab_free+0x137/0x180
+ kasan_slab_free+0xe/0x10
+ kfree+0x108/0x3f0
+ __vunmap+0x1b8/0x2b0
+ vfree+0x5d/0x100
+ n_tty_close+0x8a/0xf0
+ tty_ldisc_close+0xb9/0x130
+ tty_ldisc_kill+0x57/0xe0
+ tty_ldisc_hangup+0x2d1/0x6b0
+ __tty_hangup+0x4ae/0x9f0
+ tty_vhangup+0x1c/0x20
+ pty_close+0x412/0x640
+ tty_release+0x336/0x13c0
+ __fput+0x2bf/0x7e0
+ ____fput+0x1a/0x20
+ task_work_run+0x1c0/0x310
+ exit_to_usermode_loop+0x19d/0x200
+ do_syscall_64+0x287/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+
+The buggy address belongs to the object at ffff880068a8b2a0
+ which belongs to the cache kmalloc-64 of size 64
+The buggy address is located 16 bytes to the right of
+ 64-byte region [ffff880068a8b2a0, ffff880068a8b2e0)
+The buggy address belongs to the page:
+page:ffffea0001a2a2c0 count:1 mapcount:0 mapping:ffff88006c4018c0 index:0x0
+flags: 0x100000000000100(slab)
+raw: 0100000000000100 ffffea0001a1a780 0000001100000011 ffff88006c4018c0
+raw: 0000000000000000 00000000802a002a 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff880068a8b180: fb fb fb fb fb fb fb fb fc fc fc fc fb fb fb fb
+ ffff880068a8b200: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+>ffff880068a8b280: fc fc fc fc fb fb fb fb fb fb fb fb fc fc fc fc
+                                                             ^
+ ffff880068a8b300: 00 00 00 00 00 00 fc fc fc fc fc fc fb fb fb fb
+ ffff880068a8b380: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+==================================================================
+
+final repro crashed as (corrupted=false):
+==================================================================
+BUG: KASAN: slab-out-of-bounds in process_preds+0x46b7/0x4a70
+Write of size 4 at addr ffff880068a8b2f0 by task syz-executor746/2708
+
+CPU: 0 PID: 2708 Comm: syz-executor746 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ print_address_description+0x88/0x3b0
+ kasan_report+0x185/0x4a0
+ __asan_report_store4_noabort+0x1c/0x20
+ process_preds+0x46b7/0x4a70
+ create_filter+0x11d/0x1b0
+ ftrace_profile_set_filter+0x157/0x8f0
+ perf_event_set_filter+0x5d6/0xf80
+ _perf_ioctl+0x243/0xa80
+ perf_ioctl+0x5c/0xa0
+ do_vfs_ioctl+0x1e8/0x1340
+ ksys_ioctl+0x9c/0xb0
+ __x64_sys_ioctl+0x81/0xd0
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fdb9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007ffc435cd278 EFLAGS: 00000213 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fdb9
+RDX: 0000000020000000 RSI: 0000000040082406 RDI: 0000000000000003
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 0000000000000000 R11: 0000000000000213 R12: 00000000004016e0
+R13: 0000000000401770 R14: 0000000000000000 R15: 0000000000000000
+
+Allocated by task 1136:
+ save_stack+0x46/0xd0
+ kasan_kmalloc+0xad/0xe0
+ kmem_cache_alloc_node_trace+0x1a1/0x380
+ __get_vm_area_node+0x121/0x4c0
+ __vmalloc_node_range+0xa9/0x6b0
+ vmalloc+0x74/0x90
+ n_tty_open+0x20/0x2d0
+ tty_ldisc_open+0x94/0x100
+ tty_ldisc_setup+0x95/0x110
+ tty_init_dev+0x20c/0x580
+ ptmx_open+0xfd/0x3a0
+ chrdev_open+0x319/0x6d0
+ do_dentry_open+0x7de/0xf50
+ vfs_open+0x15b/0x2a0
+ path_openat+0x11b0/0x4fa0
+ do_filp_open+0x1cd/0x2e0
+ do_sys_open+0x1fc/0x4f0
+ __x64_sys_open+0x8c/0xc0
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+
+Freed by task 1136:
+ save_stack+0x46/0xd0
+ __kasan_slab_free+0x137/0x180
+ kasan_slab_free+0xe/0x10
+ kfree+0x108/0x3f0
+ __vunmap+0x1b8/0x2b0
+ vfree+0x5d/0x100
+ n_tty_close+0x8a/0xf0
+ tty_ldisc_close+0xb9/0x130
+ tty_ldisc_kill+0x57/0xe0
+ tty_ldisc_hangup+0x2d1/0x6b0
+ __tty_hangup+0x4ae/0x9f0
+ tty_vhangup+0x1c/0x20
+ pty_close+0x412/0x640
+ tty_release+0x336/0x13c0
+ __fput+0x2bf/0x7e0
+ ____fput+0x1a/0x20
+ task_work_run+0x1c0/0x310
+ exit_to_usermode_loop+0x19d/0x200
+ do_syscall_64+0x287/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+
+The buggy address belongs to the object at ffff880068a8b2a0
+ which belongs to the cache kmalloc-64 of size 64
+The buggy address is located 16 bytes to the right of
+ 64-byte region [ffff880068a8b2a0, ffff880068a8b2e0)
+The buggy address belongs to the page:
+page:ffffea0001a2a2c0 count:1 mapcount:0 mapping:ffff88006c4018c0 index:0x0
+flags: 0x100000000000100(slab)
+raw: 0100000000000100 ffffea0001a1a780 0000001100000011 ffff88006c4018c0
+raw: 0000000000000000 00000000802a002a 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+
+Memory state around the buggy address:
+ ffff880068a8b180: fb fb fb fb fb fb fb fb fc fc fc fc fb fb fb fb
+ ffff880068a8b200: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+>ffff880068a8b280: fc fc fc fc fb fb fb fb fb fb fb fb fc fc fc fc
+                                                             ^
+ ffff880068a8b300: 00 00 00 00 00 00 fc fc fc fc fc fc fb fb fb fb
+ ffff880068a8b380: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+==================================================================
+

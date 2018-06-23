@@ -1,0 +1,27 @@
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 80 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 512
+unregister_netdevice: waiting for lo to become free. Usage count = 2
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+EXT4-fs (sda): re-mounted. Opts: init_itable=4,max_batch_time=3,
+EXT4-fs (sda): re-mounted. Opts: init_itable=4,max_batch_time=3,
+netlink: 56 bytes leftover after parsing attributes in process `syz-executor1'.
+netlink: 56 bytes leftover after parsing attributes in process `syz-executor1'.
+mmap: syz-executor0 (8396) uses deprecated remap_file_pages() syscall. See Documentation/vm/remap_file_pages.rst.
+netlink: 56 bytes leftover after parsing attributes in process `syz-executor1'.
+netlink: 56 bytes leftover after parsing attributes in process `syz-executor1'.
+EXT4-fs (sda): re-mounted. Opts: barrier=2,
+EXT4-fs (sda): re-mounted. Opts: barrier=2,
+EXT4-fs (sda): re-mounted. Opts: barrier=2,
+sr 1:0:0:0: [sr0] unaligned transfer

@@ -1,0 +1,50 @@
+------------[ cut here ]------------
+precision 64292 too large
+WARNING: CPU: 0 PID: 7927 at lib/vsprintf.c:2164 set_precision+0x15c/0x1c0 lib/vsprintf.c:2164
+Kernel panic - not syncing: panic_on_warn set ...
+
+CPU: 0 PID: 7927 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ panic+0x230/0x4df kernel/panic.c:184
+ __warn+0x1e8/0x240 kernel/panic.c:536
+ report_bug+0x223/0x310 lib/bug.c:186
+ fixup_bug.part.5+0x41/0xa0 arch/x86/kernel/traps.c:178
+ fixup_bug arch/x86/kernel/traps.c:306 [inline]
+ do_error_trap+0x6f/0xd0 arch/x86/kernel/traps.c:296
+ do_invalid_op+0x20/0x30 arch/x86/kernel/traps.c:316
+ invalid_op+0x14/0x20 arch/x86/entry/entry_64.S:992
+RIP: 0010:set_precision+0x15c/0x1c0 lib/vsprintf.c:2164
+Code: 6f 88 43 06 0f b6 c4 88 43 07 e9 4f ff ff ff e8 5a dd 75 fd 44 89 e6 48 c7 c7 60 de 6a 84 c6 05 2e 1c a5 03 01 e8 a4 5e 45 fd <0f> 0b e9 61 ff ff ff e8 38 dd 75 fd 41 0f b6 f6 48 c7 c7 20 0a 75 
+RSP: 0018:ffff88004d3bf888 EFLAGS: 00010082
+RAX: 0000000000000000 RBX: ffff88004d3bf928 RCX: ffffffff81577156
+RDX: 0000000000000001 RSI: 0000000000000008 RDI: ffff88006c8206c8
+RBP: ffff88004d3bf8b0 R08: ffffed000d9040da R09: ffffed000d9040da
+R10: 0000000000000002 R11: ffffed000d9040d9 R12: 000000000000fb24
+R13: ffff88004d3bf92f R14: 0000000000000000 R15: ffff88004d3bf928
+ vsnprintf+0x551/0x22c0 lib/vsprintf.c:2240
+ vscnprintf+0x2d/0x60 lib/vsprintf.c:2370
+ vprintk_emit+0x10e/0x800 kernel/printk/printk.c:1853
+ vprintk_default+0x2d/0x40 kernel/printk/printk.c:1948
+ vprintk_func+0x5c/0xd0 kernel/printk/printk_safe.c:382
+ printk+0xbe/0xf2 kernel/printk/printk.c:1981
+ dns_resolver_preparse+0x48f/0x940 net/dns_resolver/dns_key.c:130
+ key_create_or_update+0x3a4/0xc10 security/keys/key.c:849
+ __do_sys_add_key security/keys/keyctl.c:122 [inline]
+ __se_sys_add_key security/keys/keyctl.c:62 [inline]
+ __x64_sys_add_key+0x2b0/0x4c0 security/keys/keyctl.c:62
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007f7a67b6dc68 EFLAGS: 00000246 ORIG_RAX: 00000000000000f8
+RAX: ffffffffffffffda RBX: 00007f7a67b6e6d4 RCX: 0000000000455a09
+RDX: 0000000020000240 RSI: 0000000020000080 RDI: 0000000020000140
+RBP: 000000000072bea0 R08: ffffffffffffffff R09: 0000000000000000
+R10: 000000000000fda3 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000018 R14: 00000000006f52e0 R15: 0000000000000000
+Dumping ftrace buffer:
+   (ftrace buffer empty)
+Kernel Offset: disabled

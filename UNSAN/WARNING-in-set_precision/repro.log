@@ -1,0 +1,67 @@
+executing program
+syzkaller login: [   13.919757] ------------[ cut here ]------------
+[   13.919759] precision 64439 too large
+[   13.919762] WARNING: CPU: 0 PID: 2711 at lib/vsprintf.c:2164 set_precision+0x15c/0x1c0
+[   13.919764] Kernel panic - not syncing: panic_on_warn set ...
+[   13.919765] 
+[   13.919767] CPU: 0 PID: 2711 Comm: syz-executor088 Not tainted 4.18.0-rc1 #2
+[   13.919771] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.919772] Call Trace:
+[   13.919773]  dump_stack+0x122/0x1c8
+[   13.919775]  ? show_regs_print_info+0x18/0x18
+[   13.919776]  panic+0x230/0x4df
+[   13.919778]  ? refcount_error_report+0x321/0x321
+[   13.919780]  ? kmsg_dump_rewind_nolock+0x105/0x105
+[   13.919781]  ? __probe_kernel_read+0x1bc/0x2c0
+[   13.919783]  ? set_precision+0x15c/0x1c0
+[   13.919784]  __warn+0x1e8/0x240
+[   13.919785]  ? set_precision+0x15c/0x1c0
+[   13.919787]  report_bug+0x223/0x310
+[   13.919788]  fixup_bug.part.5+0x41/0xa0
+[   13.919790]  do_error_trap+0x6f/0xd0
+[   13.919791]  do_invalid_op+0x20/0x30
+[   13.919792]  invalid_op+0x14/0x20
+[   13.919794] RIP: 0010:set_precision+0x15c/0x1c0
+[   13.919795] Code: 6f 88 43 06 0f b6 c4 88 43 07 e9 4f ff ff ff e8 5a dd 75 fd 44 89 e6 48 c7 c7 60 de 6a 84 c6 05 2e 1c a5 03 01 e8 a4 5e 45 fd <0f> 0b e9 61 ff ff ff e8 38 dd 75 fd 41 0f b6 f6 48 c7 c7 20 0a 75 
+[   13.919843] RSP: 0018:ffff880067e2f888 EFLAGS: 00010082
+[   13.919846] RAX: 0000000000000000 RBX: ffff880067e2f928 RCX: ffffffff81577156
+[   13.919849] RDX: 0000000000000001 RSI: 0000000000000008 RDI: ffff88006c8206c8
+[   13.919851] RBP: ffff880067e2f8b0 R08: ffffed000d9040da R09: ffffed000d9040da
+[   13.919853] R10: 0000000000000002 R11: ffffed000d9040d9 R12: 000000000000fbb7
+[   13.919856] R13: ffff880067e2f92f R14: 0000000000000000 R15: ffff880067e2f928
+[   13.919857]  ? irq_work_claim+0x66/0xc0
+[   13.919858]  ? set_precision+0x15c/0x1c0
+[   13.919860]  vsnprintf+0x551/0x22c0
+[   13.919861]  ? pointer+0xa70/0xa70
+[   13.919863]  ? set_pageblock_migratetype+0x70/0x70
+[   13.919864]  vscnprintf+0x2d/0x60
+[   13.919866]  vprintk_emit+0x10e/0x800
+[   13.919867]  ? kmsg_dump_get_buffer+0xc90/0xc90
+[   13.919869]  ? __kernel_text_address+0x12/0x40
+[   13.919870]  vprintk_default+0x2d/0x40
+[   13.919872]  vprintk_func+0x5c/0xd0
+[   13.919873]  printk+0xbe/0xf2
+[   13.919874]  ? kmsg_dump_rewind_nolock+0x105/0x105
+[   13.919876]  dns_resolver_preparse+0x48f/0x940
+[   13.919878]  ? dns_resolver_free_preparse+0x60/0x60
+[   13.919879]  ? dns_resolver_free_preparse+0x60/0x60
+[   13.919881]  key_create_or_update+0x3a4/0xc10
+[   13.919882]  ? key_type_lookup+0xf0/0xf0
+[   13.919884]  ? lookup_user_key+0x1c0/0x1050
+[   13.919886]  ? join_session_keyring+0x330/0x330
+[   13.919887]  __x64_sys_add_key+0x2b0/0x4c0
+[   13.919889]  ? __x64_sys_request_key+0x3f0/0x3f0
+[   13.919890]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.919892]  do_syscall_64+0xb8/0x3a0
+[   13.919894]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.919895] RIP: 0033:0x445579
+[   13.919896] Code: e8 4c b6 02 00 48 83 c4 18 c3 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb 51 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.919943] RSP: 002b:00007fa90313bda8 EFLAGS: 00000246 ORIG_RAX: 00000000000000f8
+[   13.919947] RAX: ffffffffffffffda RBX: 00000000006dac24 RCX: 0000000000445579
+[   13.919950] RDX: 0000000020000240 RSI: 0000000020000080 RDI: 0000000020000140
+[   13.919952] RBP: 0000000000000000 R08: 00000000ffffffff R09: 0000000000000000
+[   13.919954] R10: 000000000000fda3 R11: 0000000000000246 R12: 00000000006dac20
+[   13.919957] R13: 6f7365725f736e64 R14: 00007fa90313c9c0 R15: 0000000000000002
+[   13.920210] Dumping ftrace buffer:
+[   13.920212]    (ftrace buffer empty)
+[   13.920213] Kernel Offset: disabled

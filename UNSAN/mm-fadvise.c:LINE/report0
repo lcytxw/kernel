@@ -1,0 +1,27 @@
+================================================================================
+UBSAN: Undefined behaviour in mm/fadvise.c:76:10
+signed integer overflow:
+4 + 9223372036854775805 cannot be represented in type 'long long int'
+CPU: 0 PID: 13477 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ __ubsan_handle_add_overflow+0x2a/0x31 lib/ubsan.c:198
+ ksys_fadvise64_64+0xbf0/0xd10 mm/fadvise.c:76
+ __do_sys_fadvise64 mm/fadvise.c:198 [inline]
+ __se_sys_fadvise64 mm/fadvise.c:196 [inline]
+ __x64_sys_fadvise64+0xa9/0x120 mm/fadvise.c:196
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007fc2de8f2c68 EFLAGS: 00000246 ORIG_RAX: 00000000000000dd
+RAX: ffffffffffffffda RBX: 00007fc2de8f36d4 RCX: 0000000000455a09
+RDX: 7ffffffffffffffd RSI: 0000000000000004 RDI: 0000000000000013
+RBP: 000000000072bea0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000004 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 000000000000007d R14: 00000000006f5c58 R15: 0000000000000000
+================================================================================

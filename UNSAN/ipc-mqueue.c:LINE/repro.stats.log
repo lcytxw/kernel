@@ -1,0 +1,143 @@
+596 programs, 1 VMs
+extracting reproducer from 575 programs
+single: executing 2 programs separately with timeout 10s
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): openat-ftruncate-getsockopt$inet_sctp_SCTP_LOCAL_AUTH_CHUNKS-getsockopt$inet_sctp6_SCTP_DEFAULT_PRINFO-ioctl$SNDRV_TIMER_IOCTL_SELECT-sendfile-setsockopt$inet_MCAST_MSFILTER-setsockopt$bt_BT_CHANNEL_POLICY-ioctl$SNDRV_SEQ_IOCTL_CLIENT_ID
+program did not crash
+testing program (duration=10s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET-getsockopt$inet6_IPV6_FLOWLABEL_MGR-sendfile-getsockopt$sock_cred-getsockopt$inet_sctp6_SCTP_SOCKOPT_PEELOFF-setsockopt$inet_sctp6_SCTP_PEER_ADDR_PARAMS-sched_getscheduler
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+single: successfully extracted reproducer
+found reproducer with 26 syscalls
+minimizing guilty program
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET-getsockopt$inet6_IPV6_FLOWLABEL_MGR-sendfile-getsockopt$sock_cred-getsockopt$inet_sctp6_SCTP_SOCKOPT_PEELOFF-setsockopt$inet_sctp6_SCTP_PEER_ADDR_PARAMS
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET-getsockopt$inet6_IPV6_FLOWLABEL_MGR-sendfile-getsockopt$sock_cred-getsockopt$inet_sctp6_SCTP_SOCKOPT_PEELOFF
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET-getsockopt$inet6_IPV6_FLOWLABEL_MGR-sendfile-getsockopt$sock_cred
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET-getsockopt$inet6_IPV6_FLOWLABEL_MGR-sendfile
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET-getsockopt$inet6_IPV6_FLOWLABEL_MGR
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open-sendmsg$TEAM_CMD_OPTIONS_GET
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-getpeername$packet
+program did not crash
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-accept4$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-timer_getoverrun-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-timer_create-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-getsockopt$inet6_IPV6_IPSEC_POLICY-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-accept4$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-ioctl$CDROM_SELECT_SPEED-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-getpeername$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-getsockname$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-accept4$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-getsockopt$inet_IP_IPSEC_POLICY-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-ioctl$CDROMVOLREAD-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-ioctl$ifreq_SIOCGIFINDEX_team-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-getpeername$packet-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-syz_genetlink_get_family_id$team-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-syz_open_procfs-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-write$binfmt_script-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): syz_open_dev$CDROM_DEV_LINK-mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+extracting C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:true Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+simplifying C reproducer
+testing compiled C program (duration=15s, {Threaded:true Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:true Procs:2 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:true EnableNetdev:true ResetNet:true HandleSegv:true WaitRepeat:true Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 EnableTun:true UseTmpDir:true EnableCgroups:false EnableNetdev:true ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:true EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:true WaitRepeat:false Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+testing compiled C program (duration=15s, {Threaded:false Collide:false Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:true}): mq_open
+program crashed: UBSAN: Undefined behaviour in ipc/mqueue.c:LINE
+reproducing took 16m40.496237485s
+repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in ipc/mqueue.c:414:49
+signed integer overflow:
+217445604261888 * 65536 cannot be represented in type 'long int'
+CPU: 0 PID: 2713 Comm: syz-executor523 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ handle_overflow+0x1c2/0x21f
+ __ubsan_handle_mul_overflow+0x2a/0x38
+ mqueue_evict_inode+0x9cf/0xce0
+ evict+0x34e/0x970
+ iput+0x523/0x9f0
+ mqueue_get_inode+0xab9/0x1180
+ mqueue_create_attr+0x2c9/0x660
+ vfs_mkobj+0x321/0x560
+ do_mq_open+0x723/0x990
+ __x64_sys_mq_open+0x160/0x200
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fce9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007fffc3661f08 EFLAGS: 00000207 ORIG_RAX: 00000000000000f0
+RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fce9
+RDX: 0000000000000100 RSI: 0000000000000040 RDI: 00000000200004c0
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 0000000020000500 R11: 0000000000000207 R12: 0000000000401610
+R13: 00000000004016a0 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+
+final repro crashed as (corrupted=false):
+================================================================================
+UBSAN: Undefined behaviour in ipc/mqueue.c:414:49
+signed integer overflow:
+217445604261888 * 65536 cannot be represented in type 'long int'
+CPU: 0 PID: 2713 Comm: syz-executor523 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ dump_stack+0x122/0x1c8
+ ubsan_epilogue+0x12/0x86
+ handle_overflow+0x1c2/0x21f
+ __ubsan_handle_mul_overflow+0x2a/0x38
+ mqueue_evict_inode+0x9cf/0xce0
+ evict+0x34e/0x970
+ iput+0x523/0x9f0
+ mqueue_get_inode+0xab9/0x1180
+ mqueue_create_attr+0x2c9/0x660
+ vfs_mkobj+0x321/0x560
+ do_mq_open+0x723/0x990
+ __x64_sys_mq_open+0x160/0x200
+ do_syscall_64+0xb8/0x3a0
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x43fce9
+Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007fffc3661f08 EFLAGS: 00000207 ORIG_RAX: 00000000000000f0
+RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fce9
+RDX: 0000000000000100 RSI: 0000000000000040 RDI: 00000000200004c0
+RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+R10: 0000000020000500 R11: 0000000000000207 R12: 0000000000401610
+R13: 00000000004016a0 R14: 0000000000000000 R15: 0000000000000000
+================================================================================
+

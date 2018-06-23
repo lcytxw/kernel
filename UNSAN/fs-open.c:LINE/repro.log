@@ -1,0 +1,30 @@
+executing program
+syzkaller login: [   14.124832] ================================================================================
+[   14.126935] UBSAN: Undefined behaviour in fs/open.c:312:15
+[   14.128349] signed integer overflow:
+[   14.129148] 9223372036854775806 + 65533 cannot be represented in type 'long long int'
+[   14.131039] CPU: 0 PID: 2712 Comm: syz-executor626 Not tainted 4.18.0-rc1 #2
+[   14.132769] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   14.135517] Call Trace:
+[   14.136183]  dump_stack+0x122/0x1c8
+[   14.136973]  ? show_regs_print_info+0x18/0x18
+[   14.138048]  ubsan_epilogue+0x12/0x86
+[   14.138977]  handle_overflow+0x1c2/0x21f
+[   14.139955]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   14.141257]  ? rcu_note_context_switch+0x400/0x400
+[   14.142421]  ? selinux_file_permission+0xfc/0x5e0
+[   14.143567]  __ubsan_handle_add_overflow+0x2a/0x31
+[   14.144737]  vfs_fallocate+0x6da/0x880
+[   14.145677]  ksys_fallocate+0x4b/0x80
+[   14.146612]  __x64_sys_fallocate+0xa9/0x120
+[   14.147646]  do_syscall_64+0xb8/0x3a0
+[   14.148574]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   14.149784] RIP: 0033:0x43fcb9
+[   14.150560] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   14.155107] RSP: 002b:00007ffd4720be38 EFLAGS: 00000213 ORIG_RAX: 000000000000011d
+[   14.156857] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fcb9
+[   14.158612] RDX: 7ffffffffffffffe RSI: 0000000000000003 RDI: 0000000000000003
+[   14.160282] RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+[   14.162033] R10: 000000000000fffd R11: 0000000000000213 R12: 00000000004015e0
+[   14.163692] R13: 0000000000401670 R14: 0000000000000000 R15: 0000000000000000
+[   14.165441] ================================================================================

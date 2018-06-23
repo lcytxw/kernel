@@ -1,0 +1,12 @@
+FAT-fs (loop1): bogus number of reserved sectors
+FAT-fs (loop1): Can't find a valid FAT filesystem
+unregister_netdevice: waiting for lo to become free. Usage count = 2
+FAT-fs (loop1): Unrecognized mount option "./file0/file0/file1/file0" or missing value
+SELinux: unrecognized netlink message: protocol=6 nlmsg_type=39 sclass=netlink_xfrm_socket pig=9584 comm=syz-executor1
+sr 1:0:0:0: [sr0] CDROM not ready.  Make sure there is a disc in the drive.
+FAT-fs (loop1): bogus number of FAT structure
+FAT-fs (loop1): Can't find a valid FAT filesystem
+FAT-fs (loop1): bogus number of FAT structure
+FAT-fs (loop1): Can't find a valid FAT filesystem
+netlink: 204 bytes leftover after parsing attributes in process `syz-executor1'.
+netlink: 204 bytes leftover after parsing attributes in process `syz-executor1'.

@@ -1,0 +1,54 @@
+syzkaller login: [   13.652775] ================================================================================
+[   13.655182] UBSAN: Undefined behaviour in ipc/mqueue.c:414:49
+[   13.656720] signed integer overflow:
+[   13.657564] 217445604261888 * 65536 cannot be represented in type 'long int'
+[   13.659074] CPU: 0 PID: 2713 Comm: syz-executor523 Not tainted 4.18.0-rc1 #2
+[   13.660589] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.663043] Call Trace:
+[   13.663576]  dump_stack+0x122/0x1c8
+[   13.664334]  ? show_regs_print_info+0x18/0x18
+[   13.665263]  ubsan_epilogue+0x12/0x86
+[   13.666045]  handle_overflow+0x1c2/0x21f
+[   13.666886]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   13.668049]  ? mqueue_evict_inode+0x9d/0xce0
+[   13.668961]  ? trace_hardirqs_on+0x5d/0x160
+[   13.669855]  ? clear_inode+0x1fc/0x380
+[   13.670662]  ? get_next_ino+0x150/0x150
+executing program
+[   13.671478]  ? __inode_wait_for_writeback+0x140/0x230
+[   13.672559]  __ubsan_handle_mul_overflow+0x2a/0x38
+[   13.673579]  mqueue_evict_inode+0x9cf/0xce0
+[   13.674480]  ? __x64_sys_mq_timedsend+0x240/0x240
+[   13.675476]  ? inode_wait_for_writeback+0x84/0x110
+[   13.676487]  ? sb_clear_inode_writeback+0x4f0/0x4f0
+[   13.677542]  ? __x64_sys_mq_timedsend+0x240/0x240
+[   13.678546]  evict+0x34e/0x970
+[   13.679203]  ? destroy_inode+0x1b0/0x1b0
+[   13.680044]  iput+0x523/0x9f0
+[   13.680677]  ? inode_add_lru+0x1e0/0x1e0
+[   13.681519]  ? ns_capable_common+0x140/0x1c0
+[   13.682428]  mqueue_get_inode+0xab9/0x1180
+[   13.683306]  ? mqueue_read_file+0x480/0x480
+[   13.684189]  ? may_create+0x258/0x5d0
+[   13.684964]  ? vfs_rmdir+0x4f0/0x4f0
+[   13.685740]  mqueue_create_attr+0x2c9/0x660
+[   13.686635]  ? mqueue_get_inode+0x1180/0x1180
+[   13.687600]  vfs_mkobj+0x321/0x560
+[   13.688525]  ? mqueue_get_inode+0x1180/0x1180
+[   13.689691]  do_mq_open+0x723/0x990
+[   13.690658]  ? init_once+0x20/0x20
+[   13.691565]  ? handle_mm_fault+0x137/0x4c0
+[   13.692501]  __x64_sys_mq_open+0x160/0x200
+[   13.693451]  ? __x64_sys_mq_notify+0x190/0x190
+[   13.694409]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.695522]  do_syscall_64+0xb8/0x3a0
+[   13.696297]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.697377] RIP: 0033:0x43fce9
+[   13.698029] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.701970] RSP: 002b:00007fffc3661f08 EFLAGS: 00000207 ORIG_RAX: 00000000000000f0
+[   13.703804] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fce9
+[   13.705293] RDX: 0000000000000100 RSI: 0000000000000040 RDI: 00000000200004c0
+[   13.706798] RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+[   13.708278] R10: 0000000020000500 R11: 0000000000000207 R12: 0000000000401610
+[   13.709772] R13: 00000000004016a0 R14: 0000000000000000 R15: 0000000000000000
+[   13.711263] ================================================================================

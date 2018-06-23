@@ -1,0 +1,65 @@
+================================================================================
+UBSAN: Undefined behaviour in kernel/time/posix-timers.c:705:20
+signed integer overflow:
+-1649256199 + -1649256197 cannot be represented in type 'int'
+CPU: 0 PID: 4971 Comm: syz-executor0 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ ? 0xffffffffa0008077
+ __ubsan_handle_add_overflow+0x2a/0x31 lib/ubsan.c:198
+ common_timer_get+0x55a/0x670 kernel/time/posix-timers.c:705
+ common_timer_set+0x68/0x570 kernel/time/posix-timers.c:843
+ do_timer_settime+0x255/0x350 kernel/time/posix-timers.c:896
+ __do_sys_timer_settime kernel/time/posix-timers.c:922 [inline]
+ __se_sys_timer_settime kernel/time/posix-timers.c:908 [inline]
+ __x64_sys_timer_settime+0x1a0/0x270 kernel/time/posix-timers.c:908
+ ? 0xffffffffa0008077
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007f428926bc68 EFLAGS: 00000246 ORIG_RAX: 00000000000000df
+RAX: ffffffffffffffda RBX: 00007f428926c6d4 RCX: 0000000000455a09
+RDX: 0000000020000200 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 000000000072bf50 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000020000240 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000793 R14: 0000000000700668 R15: 0000000000000001
+================================================================================
+netlink: 'syz-executor0': attribute type 18 has an invalid length.
+netlink: 'syz-executor0': attribute type 18 has an invalid length.
+scsi_io_completion: 4 callbacks suppressed
+sd 0:0:0:0: [sg0] tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK
+sd 0:0:0:0: [sg0] tag#0 CDB: Xpwrite, Read disk info
+sd 0:0:0:0: [sg0] tag#0 CDB[00]: 51 a6 c5 5d b3 10 1b 2a 4c 1b d2 06 85 55 2c f7
+sd 0:0:0:0: [sg0] tag#0 CDB[10]: 98 64 54 fe 4d 69 bb 9b 3a 7c 2b e7 47 40 c7 58
+sd 0:0:0:0: [sg0] tag#0 CDB[20]: fb 26 20 47 b5 48 03 08 01 2b 12 d6 29 7a e7 82
+sd 0:0:0:0: [sg0] tag#0 CDB[30]: 72 8a bb f2 15 7b dc 02 75 68 25 bd 4f 88 d2 1f
+sd 0:0:0:0: [sg0] tag#0 CDB[40]: 48 fe 3f 05 d4 57 36 30 48 da 95 58 aa 1c cb 05
+sd 0:0:0:0: [sg0] tag#0 CDB[50]: dc 54 56 0a 54 1d a6 34 3c 5b 42 d0 38 53 10 5d
+sd 0:0:0:0: [sg0] tag#0 CDB[60]: 62 c0 a9 34 30 d1 50 f8 52 e5 c4 a3 cd 49 1c 3c
+sd 0:0:0:0: [sg0] tag#0 CDB[70]: db e5 3a aa ba 79 8d 2d f9 14 f8 25 89 1d 44 2e
+sd 0:0:0:0: [sg0] tag#0 CDB[80]: c4 0a 70 18 aa 38 7f 67 f0 3a fd 60 0c e4 05 d1
+sd 0:0:0:0: [sg0] tag#0 CDB[90]: 6d e3 fa 8e 82 54 f0 f3 a6 72 26 a3 8c 75 3c 1a
+sd 0:0:0:0: [sg0] tag#0 CDB[a0]: 4d 28 9f d6 3a 1f c5 f7 18 ae 7b 73 2e 33 b2 e5
+sd 0:0:0:0: [sg0] tag#0 CDB[b0]: 6f 2a 96 af 6d 4c f8 39 18 ce 74
+sd 0:0:0:0: [sg0] tag#0 FAILED Result: hostbyte=DID_ABORT driverbyte=DRIVER_OK
+sd 0:0:0:0: [sg0] tag#0 CDB: Xpwrite, Read disk info
+sd 0:0:0:0: [sg0] tag#0 CDB[00]: 51 a6 c5 5d b3 10 1b 2a 4c 1b d2 06 85 55 2c f7
+sd 0:0:0:0: [sg0] tag#0 CDB[10]: 98 64 54 fe 4d 69 bb 9b 3a 7c 2b e7 47 40 c7 58
+sd 0:0:0:0: [sg0] tag#0 CDB[20]: fb 26 20 47 b5 48 03 08 01 2b 12 d6 29 7a e7 82
+sd 0:0:0:0: [sg0] tag#0 CDB[30]: 72 8a bb f2 15 7b dc 02 75 68 25 bd 4f 88 d2 1f
+sd 0:0:0:0: [sg0] tag#0 CDB[40]: 48 fe 3f 05 d4 57 36 30 48 da 95 58 aa 1c cb 05
+sd 0:0:0:0: [sg0] tag#0 CDB[50]: dc 54 56 0a 54 1d a6 34 3c 5b 42 d0 38 53 10 5d
+sd 0:0:0:0: [sg0] tag#0 CDB[60]: 62 c0 a9 34 30 d1 50 f8 52 e5 c4 a3 cd 49 1c 3c
+sd 0:0:0:0: [sg0] tag#0 CDB[70]: db e5 3a aa ba 79 8d 2d f9 14 f8 25 89 1d 44 2e
+sd 0:0:0:0: [sg0] tag#0 CDB[80]: c4 0a 70 18 aa 38 7f 67 f0 3a fd 60 0c e4 05 d1
+sd 0:0:0:0: [sg0] tag#0 CDB[90]: 6d e3 fa 8e 82 54 f0 f3 a6 72 26 a3 8c 75 3c 1a
+sd 0:0:0:0: [sg0] tag#0 CDB[a0]: 4d 28 9f d6 3a 1f c5 f7 18 ae 7b 73 2e 33 b2 e5
+sd 0:0:0:0: [sg0] tag#0 CDB[b0]: 6f 2a 96 af 6d 4c f8 39 18 ce 74
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor0'.
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor0'.
+capability: warning: `syz-executor1' uses deprecated v2 capabilities in a way that may be insecure

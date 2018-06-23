@@ -1,0 +1,230 @@
+
+Debian GNU/Linux 7 syzkaller ttyS0
+
+executing program
+syzkaller login: [   13.697724] ==================================================================
+[   13.702345] BUG: KASAN: slab-out-of-bounds in process_preds+0x46b7/0x4a70
+[   13.707525] Write of size 4 at addr ffff880068a8b2f0 by task syz-executor746/2708
+[   13.712132] 
+[   13.713293] CPU: 0 PID: 2708 Comm: syz-executor746 Not tainted 4.18.0-rc1 #2
+[   13.717623] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.725167] Call Trace:
+[   13.727219]  dump_stack+0x122/0x1c8
+[   13.729418]  ? show_regs_print_info+0x18/0x18
+[   13.732292]  ? printk+0xbe/0xf2
+[   13.734461]  ? kmsg_dump_rewind_nolock+0x105/0x105
+[   13.738171]  ? kasan_check_write+0x14/0x20
+[   13.740708]  print_address_description+0x88/0x3b0
+[   13.744512]  kasan_report+0x185/0x4a0
+[   13.746792]  ? process_preds+0x46b7/0x4a70
+[   13.749080]  ? process_preds+0x46b7/0x4a70
+[   13.751612]  ? kasan_kmalloc+0x31/0xe0
+[   13.754027]  ? process_preds+0x46b7/0x4a70
+[   13.757809]  __asan_report_store4_noabort+0x1c/0x20
+[   13.760561]  process_preds+0x46b7/0x4a70
+[   13.762905]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.766550]  ? filter_parse_regex+0x3d0/0x3d0
+[   13.769217]  ? depot_save_stack+0x3e1/0x930
+[   13.772358]  ? kasan_unpoison_shadow+0x36/0x50
+[   13.774963]  ? kasan_kmalloc+0xad/0xe0
+[   13.777631]  ? kmem_cache_alloc_trace+0x16e/0x370
+[   13.779340]  ? __x64_sys_ioctl+0x81/0xd0
+[   13.780684]  ? do_syscall_64+0xb8/0x3a0
+[   13.782009]  ? create_filter_start.constprop.2+0x12f/0x340
+[   13.785970]  ? create_filter_start.constprop.2+0x68/0x340
+[   13.787959]  create_filter+0x11d/0x1b0
+[   13.791059]  ? kasan_check_read+0x11/0x20
+[   13.792672]  ? process_preds+0x4a70/0x4a70
+[   13.796578]  ? ctx_sched_in.isra.43+0xe8/0x4e0
+[   13.798412]  ? __perf_event_read+0xa30/0xa30
+[   13.813764]  ftrace_profile_set_filter+0x157/0x8f0
+[   13.814804]  ? kasan_unpoison_shadow+0x36/0x50
+[   13.815806]  ? ftrace_profile_free_filter+0x70/0x70
+[   13.816916]  ? kasan_slab_alloc+0x11/0x20
+[   13.817822]  ? _copy_from_user+0x7a/0xf0
+[   13.818708]  perf_event_set_filter+0x5d6/0xf80
+[   13.819686]  ? generic_exec_single+0x177/0x490
+[   13.820668]  ? __jump_label_transform+0x3b3/0x740
+[   13.821763]  ? perf_group_attach+0x5b0/0x5b0
+[   13.822761]  ? smp_call_function_single+0x1c5/0x2f0
+[   13.823828]  ? task_function_call+0x190/0x190
+[   13.826091]  ? generic_exec_single+0x490/0x490
+[   13.827052]  ? kasan_kmalloc+0xad/0xe0
+[   13.827915]  ? _perf_ioctl+0x243/0xa80
+[   13.830534]  _perf_ioctl+0x243/0xa80
+[   13.833014]  ? __ia32_sys_perf_event_open+0x160/0x160
+[   13.843189]  ? kasan_check_read+0x11/0x20
+[   13.844085]  ? mutex_lock+0x96/0xf0
+[   13.844882]  ? __mutex_lock_slowpath+0x20/0x20
+[   13.845882]  ? perf_event_ctx_lock_nested.isra.41+0x1eb/0x2d0
+[   13.847142]  ? get_unused_fd_flags+0x140/0x140
+[   13.848123]  ? put_ctx+0x140/0x140
+[   13.848896]  ? mutex_lock+0x96/0xf0
+[   13.849671]  ? _perf_ioctl+0xa80/0xa80
+[   13.850533]  perf_ioctl+0x5c/0xa0
+[   13.851280]  do_vfs_ioctl+0x1e8/0x1340
+[   13.852726]  ? __do_sys_perf_event_open+0x2c3/0x22e0
+[   13.861421]  ? ioctl_preallocate+0x250/0x250
+[   13.862393]  ? selinux_file_ioctl+0x3d9/0x680
+[   13.863364]  ? match_file+0x140/0x140
+[   13.864205]  ? handle_mm_fault+0x137/0x4c0
+[   13.865128]  ? security_file_ioctl+0x91/0xd0
+[   13.866099]  ksys_ioctl+0x9c/0xb0
+[   13.866831]  __x64_sys_ioctl+0x81/0xd0
+[   13.867701]  do_syscall_64+0xb8/0x3a0
+[   13.868535]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.869647] RIP: 0033:0x43fdb9
+[   13.870347] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.874466] RSP: 002b:00007ffc435cd278 EFLAGS: 00000213 ORIG_RAX: 0000000000000010
+[   13.876101] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fdb9
+[   13.877632] RDX: 0000000020000000 RSI: 0000000040082406 RDI: 0000000000000003
+[   13.879195] RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+[   13.880723] R10: 0000000000000000 R11: 0000000000000213 R12: 00000000004016e0
+[   13.882250] R13: 0000000000401770 R14: 0000000000000000 R15: 0000000000000000
+[   13.883806] 
+[   13.884179] Allocated by task 1136:
+[   13.884953]  save_stack+0x46/0xd0
+[   13.885719]  kasan_kmalloc+0xad/0xe0
+[   13.886528]  kmem_cache_alloc_node_trace+0x1a1/0x380
+[   13.887627]  __get_vm_area_node+0x121/0x4c0
+[   13.888558]  __vmalloc_node_range+0xa9/0x6b0
+[   13.889489]  vmalloc+0x74/0x90
+[   13.890194]  n_tty_open+0x20/0x2d0
+[   13.890953]  tty_ldisc_open+0x94/0x100
+[   13.891792]  tty_ldisc_setup+0x95/0x110
+[   13.892659]  tty_init_dev+0x20c/0x580
+[   13.893451]  ptmx_open+0xfd/0x3a0
+[   13.894310]  chrdev_open+0x319/0x6d0
+[   13.895128]  do_dentry_open+0x7de/0xf50
+[   13.895988]  vfs_open+0x15b/0x2a0
+[   13.896738]  path_openat+0x11b0/0x4fa0
+[   13.897578]  do_filp_open+0x1cd/0x2e0
+[   13.898417]  do_sys_open+0x1fc/0x4f0
+[   13.899244]  __x64_sys_open+0x8c/0xc0
+[   13.900074]  do_syscall_64+0xb8/0x3a0
+[   13.900905]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.902029] 
+[   13.902413] Freed by task 1136:
+[   13.903131]  save_stack+0x46/0xd0
+[   13.903867]  __kasan_slab_free+0x137/0x180
+[   13.904776]  kasan_slab_free+0xe/0x10
+[   13.905586]  kfree+0x108/0x3f0
+[   13.906289]  __vunmap+0x1b8/0x2b0
+[   13.907031]  vfree+0x5d/0x100
+[   13.907710]  n_tty_close+0x8a/0xf0
+[   13.908473]  tty_ldisc_close+0xb9/0x130
+[   13.909330]  tty_ldisc_kill+0x57/0xe0
+[   13.910144]  tty_ldisc_hangup+0x2d1/0x6b0
+[   13.911026]  __tty_hangup+0x4ae/0x9f0
+[   13.911842]  tty_vhangup+0x1c/0x20
+[   13.912610]  pty_close+0x412/0x640
+[   13.913373]  tty_release+0x336/0x13c0
+[   13.914275]  __fput+0x2bf/0x7e0
+[   13.914981]  ____fput+0x1a/0x20
+[   13.915696]  task_work_run+0x1c0/0x310
+[   13.916528]  exit_to_usermode_loop+0x19d/0x200
+[   13.917500]  do_syscall_64+0x287/0x3a0
+[   13.918340]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.919420] 
+[   13.919796] The buggy address belongs to the object at ffff880068a8b2a0
+[   13.919796]  which belongs to the cache kmalloc-64 of size 64
+[   13.922434] The buggy address is located 16 bytes to the right of
+[   13.922434]  64-byte region [ffff880068a8b2a0, ffff880068a8b2e0)
+[   13.924974] The buggy address belongs to the page:
+[   13.926006] page:ffffea0001a2a2c0 count:1 mapcount:0 mapping:ffff88006c4018c0 index:0x0
+[   13.927684] flags: 0x100000000000100(slab)
+[   13.928565] raw: 0100000000000100 ffffea0001a1a780 0000001100000011 ffff88006c4018c0
+[   13.930267] raw: 0000000000000000 00000000802a002a 00000001ffffffff 0000000000000000
+[   13.931929] page dumped because: kasan: bad access detected
+[   13.933150] 
+[   13.933516] Memory state around the buggy address:
+[   13.949844]  ffff880068a8b180: fb fb fb fb fb fb fb fb fc fc fc fc fb fb fb fb
+[   13.951408]  ffff880068a8b200: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+[   13.952965] >ffff880068a8b280: fc fc fc fc fb fb fb fb fb fb fb fb fc fc fc fc
+[   13.954512]                                                              ^
+[   13.955999]  ffff880068a8b300: 00 00 00 00 00 00 fc fc fc fc fc fc fb fb fb fb
+[   13.957539]  ffff880068a8b380: fb fb fb fb fc fc fc fc fb fb fb fb fb fb fb fb
+[   13.959094] ==================================================================
+[   13.960621] Disabling lock debugging due to kernel taint
+[   13.962130] Kernel panic - not syncing: panic_on_warn set ...
+[   13.962130] 
+[   13.972967] CPU: 0 PID: 2708 Comm: syz-executor746 Tainted: G    B             4.18.0-rc1 #2
+[   13.974766] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.977240] Call Trace:
+[   13.977822]  dump_stack+0x122/0x1c8
+[   13.978611]  ? show_regs_print_info+0x18/0x18
+[   13.979571]  panic+0x230/0x4df
+[   13.980262]  ? refcount_error_report+0x321/0x321
+[   13.981272]  ? _raw_spin_unlock_irqrestore+0xb1/0x120
+[   13.991028]  ? _raw_spin_unlock_bh+0x100/0x100
+[   13.992575]  kasan_end_report+0x5a/0x70
+[   13.997338]  kasan_report+0x1a3/0x4a0
+[   13.998142]  ? process_preds+0x46b7/0x4a70
+[   14.001376]  ? process_preds+0x46b7/0x4a70
+[   14.003559]  ? kasan_kmalloc+0x31/0xe0
+[   14.005116]  ? process_preds+0x46b7/0x4a70
+[   14.007161]  __asan_report_store4_noabort+0x1c/0x20
+[   14.010276]  process_preds+0x46b7/0x4a70
+[   14.011774]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   14.014620]  ? filter_parse_regex+0x3d0/0x3d0
+[   14.017026]  ? depot_save_stack+0x3e1/0x930
+[   14.019310]  ? kasan_unpoison_shadow+0x36/0x50
+[   14.021570]  ? kasan_kmalloc+0xad/0xe0
+[   14.023459]  ? kmem_cache_alloc_trace+0x16e/0x370
+[   14.026151]  ? __x64_sys_ioctl+0x81/0xd0
+[   14.027566]  ? do_syscall_64+0xb8/0x3a0
+[   14.030401]  ? create_filter_start.constprop.2+0x12f/0x340
+[   14.033409]  ? create_filter_start.constprop.2+0x68/0x340
+[   14.036167]  create_filter+0x11d/0x1b0
+[   14.038328]  ? kasan_check_read+0x11/0x20
+[   14.040556]  ? process_preds+0x4a70/0x4a70
+[   14.042412]  ? ctx_sched_in.isra.43+0xe8/0x4e0
+[   14.044793]  ? __perf_event_read+0xa30/0xa30
+[   14.047219]  ftrace_profile_set_filter+0x157/0x8f0
+[   14.049485]  ? kasan_unpoison_shadow+0x36/0x50
+[   14.050780]  ? ftrace_profile_free_filter+0x70/0x70
+[   14.052086]  ? kasan_slab_alloc+0x11/0x20
+[   14.053283]  ? _copy_from_user+0x7a/0xf0
+[   14.054302]  perf_event_set_filter+0x5d6/0xf80
+[   14.057463]  ? generic_exec_single+0x177/0x490
+[   14.058809]  ? __jump_label_transform+0x3b3/0x740
+[   14.060204]  ? perf_group_attach+0x5b0/0x5b0
+[   14.061410]  ? smp_call_function_single+0x1c5/0x2f0
+[   14.064634]  ? task_function_call+0x190/0x190
+[   14.066026]  ? generic_exec_single+0x490/0x490
+[   14.067218]  ? kasan_kmalloc+0xad/0xe0
+[   14.074786]  ? _perf_ioctl+0x243/0xa80
+[   14.075787]  _perf_ioctl+0x243/0xa80
+[   14.077745]  ? __ia32_sys_perf_event_open+0x160/0x160
+[   14.079844]  ? kasan_check_read+0x11/0x20
+[   14.080878]  ? mutex_lock+0x96/0xf0
+[   14.081813]  ? __mutex_lock_slowpath+0x20/0x20
+[   14.082952]  ? perf_event_ctx_lock_nested.isra.41+0x1eb/0x2d0
+[   14.086860]  ? get_unused_fd_flags+0x140/0x140
+[   14.087995]  ? put_ctx+0x140/0x140
+[   14.096657]  ? mutex_lock+0x96/0xf0
+[   14.098690]  ? _perf_ioctl+0xa80/0xa80
+[   14.099519]  perf_ioctl+0x5c/0xa0
+[   14.101527]  do_vfs_ioctl+0x1e8/0x1340
+[   14.103661]  ? __do_sys_perf_event_open+0x2c3/0x22e0
+[   14.105987]  ? ioctl_preallocate+0x250/0x250
+[   14.107030]  ? selinux_file_ioctl+0x3d9/0x680
+[   14.109308]  ? match_file+0x140/0x140
+[   14.110218]  ? handle_mm_fault+0x137/0x4c0
+[   14.112410]  ? security_file_ioctl+0x91/0xd0
+[   14.113986]  ksys_ioctl+0x9c/0xb0
+[   14.117698]  __x64_sys_ioctl+0x81/0xd0
+[   14.118521]  do_syscall_64+0xb8/0x3a0
+[   14.122194]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   14.124498] RIP: 0033:0x43fdb9
+[   14.125259] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 6b 45 00 00 c3 66 2e 0f 1f 84 00 00 00 00 
+[   14.133166] RSP: 002b:00007ffc435cd278 EFLAGS: 00000213 ORIG_RAX: 0000000000000010
+[   14.137839] RAX: ffffffffffffffda RBX: 00000000004002c8 RCX: 000000000043fdb9
+[   14.140593] RDX: 0000000020000000 RSI: 0000000040082406 RDI: 0000000000000003
+[   14.144982] RBP: 00000000006ca018 R08: 00000000004002c8 R09: 00000000004002c8
+[   14.147575] R10: 0000000000000000 R11: 0000000000000213 R12: 00000000004016e0
+[   14.151695] R13: 0000000000401770 R14: 0000000000000000 R15: 0000000000000000
+[   14.155949] Dumping ftrace buffer:
+[   14.156955]    (ftrace buffer empty)
+[   14.157729] Kernel Offset: disabled
+[   14.161356] Rebooting in 86400 seconds..

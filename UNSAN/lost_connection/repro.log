@@ -1,0 +1,2 @@
+executing program
+umount(./0/file1) failed (errno 22)

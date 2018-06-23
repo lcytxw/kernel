@@ -1,0 +1,4 @@
+# {Threaded:true Collide:true Repeat:false Procs:1 Sandbox: Fault:false FaultCall:-1 FaultNth:0 EnableTun:false UseTmpDir:false EnableCgroups:false EnableNetdev:false ResetNet:false HandleSegv:false WaitRepeat:false Debug:false Repro:false}
+timer_create(0x0, &(0x7f0000000300)={0x0, 0x0, 0x1, @thr={&(0x7f0000000140), &(0x7f0000000200)}}, &(0x7f0000000340))
+timer_settime(0x0, 0xfffffffffffffffd, &(0x7f00000001c0)={{0x0, 0x989680}, {0x0, 0x1c9c380}}, &(0x7f0000000280))
+timer_settime(0x0, 0x0, &(0x7f0000000200)={{}, {0x77359400}}, &(0x7f0000000240))

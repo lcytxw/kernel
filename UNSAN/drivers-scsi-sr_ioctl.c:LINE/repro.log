@@ -1,0 +1,71 @@
+executing program
+syzkaller login: [   13.645701] ================================================================================
+[   13.653620] UBSAN: Undefined behaviour in drivers/scsi/sr_ioctl.c:428:9
+[   13.657453] signed integer overflow:
+[   13.658639] 810238275 * 177 cannot be represented in type 'int'
+[   13.660761] CPU: 0 PID: 2710 Comm: syz-executor528 Not tainted 4.18.0-rc1 #2
+[   13.663094] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+[   13.666916] Call Trace:
+[   13.667797]  dump_stack+0x122/0x1c8
+[   13.668921]  ? show_regs_print_info+0x18/0x18
+[   13.670275]  ubsan_epilogue+0x12/0x86
+[   13.671485]  handle_overflow+0x1c2/0x21f
+[   13.672738]  ? __ubsan_handle_negate_overflow+0x1bc/0x1bc
+[   13.674500]  ? sg_io+0x1080/0x1080
+[   13.675643]  __ubsan_handle_mul_overflow+0x2a/0x38
+[   13.677112]  sr_select_speed+0x184/0x1b0
+[   13.678333]  ? sr_reset+0x20/0x20
+[   13.679410]  ? bdget+0x640/0x640
+[   13.680447]  cdrom_ioctl+0x517/0x340e
+[   13.681611]  ? mmc_ioctl_cdrom_read_audio+0xf00/0xf00
+[   13.683168]  ? __blkdev_get+0x1240/0x1240
+[   13.684519]  ? deref_stack_reg+0xbd/0x120
+[   13.685762]  ? __read_once_size_nocheck.constprop.3+0x50/0x50
+[   13.687711]  ? ftrace_graph_ret_addr+0x41/0x1f0
+[   13.689214]  ? save_stack_trace+0x39/0x70
+[   13.690460]  ? mntput_no_expire+0xef/0x870
+[   13.691742]  ? deref_stack_reg+0xbd/0x120
+[   13.693020]  ? __read_once_size_nocheck.constprop.3+0x50/0x50
+[   13.694845]  ? ftrace_graph_ret_addr+0x41/0x1f0
+[   13.696259]  ? deref_stack_reg+0x120/0x120
+[   13.697530]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.699281]  ? rcu_note_context_switch+0x400/0x400
+[   13.700749]  ? unwind_next_frame+0xea6/0x2e50
+[   13.702093]  ? scsi_block_when_processing_errors+0x1e4/0x340
+[   13.703898]  ? scsi_ioctl_reset+0x850/0x850
+[   13.705214]  ? kasan_check_read+0x11/0x20
+[   13.706547]  ? mutex_lock+0x96/0xf0
+[   13.707671]  ? __mutex_lock_slowpath+0x20/0x20
+[   13.709140]  sr_block_ioctl+0x10e/0x1b0
+[   13.710354]  blkdev_ioctl+0xb03/0x1fc0
+[   13.711664]  ? sr_open+0xa0/0xa0
+[   13.712846]  ? blkpg_ioctl+0xa30/0xa30
+[   13.714032]  ? __kasan_slab_free+0x137/0x180
+[   13.715400]  ? kasan_slab_free+0xe/0x10
+[   13.716682]  ? __x64_sys_open+0x8c/0xc0
+[   13.717980]  ? do_syscall_64+0xb8/0x3a0
+[   13.719309]  ? entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.721051]  ? __close_fd+0x580/0x580
+[   13.722206]  ? __handle_mm_fault+0x61a/0x1b20
+[   13.723739]  block_ioctl+0xf5/0x160
+[   13.725055]  ? blkdev_fallocate+0x4e0/0x4e0
+[   13.726547]  do_vfs_ioctl+0x1e8/0x1340
+[   13.727776]  ? ioctl_preallocate+0x250/0x250
+[   13.729185]  ? selinux_file_ioctl+0x3d9/0x680
+[   13.730523]  ? match_file+0x140/0x140
+[   13.731878]  ? __slab_free+0x1a2/0x6f0
+[   13.733127]  ? kmem_cache_free+0xdc/0x3a0
+[   13.734374]  ? security_file_ioctl+0x91/0xd0
+[   13.735809]  ksys_ioctl+0x9c/0xb0
+[   13.736769]  __x64_sys_ioctl+0x81/0xd0
+[   13.737867]  do_syscall_64+0xb8/0x3a0
+[   13.738922]  entry_SYSCALL_64_after_hwframe+0x49/0xbe
+[   13.740368] RIP: 0033:0x443d39
+[   13.741265] Code: 18 89 d0 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 1b d8 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+[   13.758990] RSP: 002b:00007ffe8d072648 EFLAGS: 00000213 ORIG_RAX: 0000000000000010
+[   13.760818] RAX: ffffffffffffffda RBX: 00000000004002e0 RCX: 0000000000443d39
+[   13.762476] RDX: 00000000304b4143 RSI: 0000000000005322 RDI: 0000000000000003
+[   13.764178] RBP: 00000000006ce018 R08: 00000000004002e0 R09: 00000000004002e0
+[   13.765793] R10: 000000000000ffff R11: 0000000000000213 R12: 00000000004019e0
+[   13.767526] R13: 0000000000401a70 R14: 0000000000000000 R15: 0000000000000000
+[   13.769121] ================================================================================

@@ -1,0 +1,191 @@
+================================================================================
+UBSAN: Undefined behaviour in kernel/time/posix-timers.c:705:20
+signed integer overflow:
+-1649631215 + -1649631213 cannot be represented in type 'int'
+CPU: 0 PID: 10470 Comm: syz-executor1 Not tainted 4.18.0-rc1 #2
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-project.org 04/01/2014
+Call Trace:
+ __dump_stack lib/dump_stack.c:77 [inline]
+ dump_stack+0x122/0x1c8 lib/dump_stack.c:113
+ ubsan_epilogue+0x12/0x86 lib/ubsan.c:159
+ handle_overflow+0x1c2/0x21f lib/ubsan.c:190
+ __ubsan_handle_add_overflow+0x2a/0x31 lib/ubsan.c:198
+ common_timer_get+0x55a/0x670 kernel/time/posix-timers.c:705
+ common_timer_set+0x68/0x570 kernel/time/posix-timers.c:843
+ do_timer_settime+0x255/0x350 kernel/time/posix-timers.c:896
+ __do_sys_timer_settime kernel/time/posix-timers.c:922 [inline]
+ __se_sys_timer_settime kernel/time/posix-timers.c:908 [inline]
+ __x64_sys_timer_settime+0x1a0/0x270 kernel/time/posix-timers.c:908
+ do_syscall_64+0xb8/0x3a0 arch/x86/entry/common.c:290
+ entry_SYSCALL_64_after_hwframe+0x49/0xbe
+RIP: 0033:0x455a09
+Code: 1d ba fb ff c3 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 0f 83 eb b9 fb ff c3 66 2e 0f 1f 84 00 00 00 00 
+RSP: 002b:00007fe0a5a07c68 EFLAGS: 00000246 ORIG_RAX: 00000000000000df
+RAX: ffffffffffffffda RBX: 00007fe0a5a086d4 RCX: 0000000000455a09
+RDX: 0000000020000200 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 000000000072bf50 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000020000240 R11: 0000000000000246 R12: 00000000ffffffff
+R13: 0000000000000793 R14: 0000000000700668 R15: 0000000000000001
+================================================================================
+semctl(GETNCNT/GETZCNT) is since 3.16 Single Unix Specification compliant.
+The task syz-executor1 (10657) triggered the difference, watch for misbehavior.
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 00 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 0
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 40 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 256
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 80 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 512
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 00 c0 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 768
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 01 00 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 1024
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 01 40 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 1280
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] unaligned transfer
+sr 1:0:0:0: [sr0] tag#0 FAILED Result: hostbyte=DID_OK driverbyte=DRIVER_SENSE
+sr 1:0:0:0: [sr0] tag#0 Sense Key : Not Ready [current] 
+sr 1:0:0:0: [sr0] tag#0 Add. Sense: Medium not present
+sr 1:0:0:0: [sr0] tag#0 CDB: Read(10) 28 00 00 00 01 80 00 00 40 00
+print_req_error: I/O error, dev sr0, sector 1536
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pig=10825 comm=syz-executor1
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=0 sclass=netlink_route_socket pig=10825 comm=syz-executor1
+SELinux: unrecognized netlink message: protocol=0 nlmsg_type=21913 sclass=netlink_route_socket pig=10852 comm=syz-executor1
+netlink: 4 bytes leftover after parsing attributes in process `syz-executor1'.
